@@ -53,7 +53,22 @@ const SETS = ROUNDS.map((ids, r) => ({
   }),
 }));
 // 사용자가 제공한 HTML에서 추출한 회차. 기존 모의고사와 동일한 화면을 사용한다.
-for (const set of JSON.parse(fs.readFileSync(P('data', 'imported-sets.json'), 'utf8'))) SETS.push(set);
+// data/explanations/<회차키>.json 이 있으면 해설·출제 포인트·영역을 덮어 쓴다(원본 imported-sets.json 은 그대로 둔다).
+const EXPL_DIR = P('data', 'explanations');
+for (const set of JSON.parse(fs.readFileSync(P('data', 'imported-sets.json'), 'utf8'))) {
+  const f = path.join(EXPL_DIR, set.key + '.json');
+  if (fs.existsSync(f)) {
+    const ex = JSON.parse(fs.readFileSync(f, 'utf8'));
+    for (const q of set.questions) {
+      const e = ex[q.id];
+      if (!e) continue;
+      if (e.explanation) q.explanation = e.explanation;
+      if (e.point) q.point = e.point;
+      if (e.area) q.bucketLabel = e.area;
+    }
+  }
+  SETS.push(set);
+}
 const spare = Object.keys(all).filter(id => !used.has(id));
 
 // 개념정리 + 감수 보완 5건

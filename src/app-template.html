@@ -257,7 +257,9 @@ function isMatch(q, part, value) {
   const v = String(value ?? '');
   if (!v.trim()) return false;
   if (q.type === 'code') { const a = normCode(v); return part.answers.some(x => normCode(x) === a); }
-  const a = normShort(v); if (!a) return false;
+  const a = normShort(v);
+  // 정답이 기호뿐이면(예: -> , →) 정규화 후 빈 문자열이 되므로 기호 자체를 비교한다
+  if (!a) { const sym = s => String(s ?? '').normalize('NFC').replace(/\s/g, '').replace(/→/g, '->').replace(/⇒/g, '=>'); const b = sym(v); return !!b && part.answers.some(x => !normShort(x) && sym(x) === b); }
   return part.answers.some(x => normShort(x) === a);
 }
 const fmtDate = ts => { const d = new Date(ts); return (d.getMonth() + 1) + '월 ' + d.getDate() + '일 ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };

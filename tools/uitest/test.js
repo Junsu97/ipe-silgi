@@ -73,7 +73,7 @@ const typeInto = (sel, value) => ev(`(() => { const el = document.querySelector(
   await sleep(2500);
 
   // 1) 홈
-  expect(await ev(`document.querySelectorAll('.set-card').length`) === 3, '홈에 모의고사 3회분 카드');
+  expect(await ev(`document.querySelectorAll('.set-card').length`) === await ev(`SETS.length`), '홈에 회차 카드 전부 표시');
   expect(await ev(`!document.getElementById('tabbar').hidden`), '홈에서 하단 탭바 표시');
   await overflow('홈 393'); await shot('01-home');
 
