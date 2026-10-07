@@ -1,0 +1,46 @@
+{
+  "results": [
+    {
+      "index": 0,
+      "verdict": "pass",
+      "reason": "javac 17 컴파일 성공, java -cp . Main 실행 출력 \"[Gold]:135 / Hi Silver:140 / Hi Silver:50 / 75\" 가 answers[0] 과 문자 단위 일치(끝 공백 없음). default 메서드 상속·재정의, 추상 메서드 동적 바인딩 추적(Gold 45/135, Silver 20/140, Silver 10/50, sum 75) 도 일치.",
+      "extraAnswers": [],
+      "note": "코드 32줄로 기준(15~30줄)보다 약간 길다. 지문·출력 형식은 명확."
+    },
+    {
+      "index": 1,
+      "verdict": "pass",
+      "reason": "컴파일 성공, 실행 출력 \"int int long double / Object long int Object / ii di di double\" 가 answers[0] 과 문자 단위 일치. 해설의 JLS 15.12.2 단계 해석(Integer→Object 가 언박싱보다 우선, f(2L,3)→f(double,int), float→double 확대) 도 실행으로 확인.",
+      "extraAnswers": [],
+      "note": "Integer 인자가 f(int) 가 아닌 f(Object) 로 가는 규칙(박싱 없는 1단계 우선)은 실기 수험서 범위를 넘는 지엽적 JLS 지식이라 난이도가 「상」 중에서도 높은 편. 출제 유지 시 해설은 현행대로 충분."
+    },
+    {
+      "index": 2,
+      "verdict": "pass",
+      "reason": "컴파일 성공, 실행 출력 \"4 12 24 / 24 10 3x2\" 가 answers[0] 과 문자 단위 일치. t={{0,4},{2,10},{6,18}} 전치·가중치 추적, 행 합 4/12/24, 대각선 루프가 i=0,1 만 수행되어 diag=10 임을 확인. 첫 줄 끝 공백 없음(sep 처리) 확인.",
+      "extraAnswers": [],
+      "note": ""
+    },
+    {
+      "index": 3,
+      "verdict": "pass",
+      "reason": "컴파일 성공, 실행 출력 \"false false true true 6 / 12 11 1 c 100 b / 22 0\" 가 answers[0] 과 문자 단위 일치. 단락 평가로 cnt 1→3→4→6, a=17/5=3→<<2=12, b=11, c=8-(10/7*7)=1, ch 복합대입 'c'(99), code=100, (char)98='b', x=22, (10^22)%7=28%7=0 모두 확인. 오버플로·UB 없음.",
+      "extraAnswers": [],
+      "note": ""
+    },
+    {
+      "index": 4,
+      "verdict": "pass",
+      "reason": "컴파일 성공(인스턴스 참조로 static 호출은 -Xlint 경고만, 오류 아님), 실행 출력 \"Parent Child / P-static C-static / C-who Parent/C-who / Child+Parent 6\" 가 answers[0] 과 문자 단위 일치. 필드 은닉·static 숨김은 참조 타입, 인스턴스 메서드는 객체 타입으로 결정되는 규칙과 일치.",
+      "extraAnswers": [],
+      "note": ""
+    },
+    {
+      "index": 5,
+      "verdict": "pass",
+      "reason": "컴파일 성공(fallthrough 는 -Xlint 경고만), 실행 출력 \"B5A15C4D1A15 40 / 4 / 2\" 가 answers[0] 과 문자 단위 일치. score: B=5, A=15(A→B 흘러내림), C=4(C→default), D=1, total 40. 두 번째 switch n=1,0,4,5,4. 세 번째 '*'→'-'→'/' 흘러내림으로 6→5→2 확인.",
+      "extraAnswers": [],
+      "note": "코드 42줄로 기준(15~30줄)을 크게 넘는다. switch 블록 3개 중 하나(예: 두 번째 i%3 루프)를 빼면 난이도 「하」 와 분량이 맞는다. 정답·형식 자체는 문제 없음."
+    }
+  ]
+}

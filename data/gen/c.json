@@ -1,0 +1,82 @@
+{
+  "questions": [
+    {
+      "subtopic": "구조체 배열과 구조체 포인터(->) 접근, 포인터로 구조체 교환",
+      "type": "code",
+      "language": "C",
+      "question": "다음 C언어 코드의 출력 결과를 쓰시오.",
+      "code": "#include <stdio.h>\n\nstruct Item {\n    int id;\n    int qty;\n    int price;\n};\n\nint total(struct Item *p, int n) {\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n        sum += (p + i)->qty * (p + i)->price;\n    }\n    return sum;\n}\n\nvoid swap(struct Item *a, struct Item *b) {\n    struct Item t = *a;\n    *a = *b;\n    *b = t;\n}\n\nint main() {\n    struct Item arr[4] = { {1, 3, 200}, {2, 5, 100}, {3, 2, 450}, {4, 4, 150} };\n    struct Item *p = arr;\n    int idx = 0;\n    for (int i = 1; i < 4; i++) {\n        if ((p + i)->qty * (p + i)->price > (p + idx)->qty * (p + idx)->price)\n            idx = i;\n    }\n    swap(&arr[0], &arr[idx]);\n    p++;\n    p->qty += 2;\n    printf(\"%d %d\\n\", arr[0].id, arr[1].qty);\n    printf(\"%d\\n\", total(arr, 4));\n    return 0;\n}\n",
+      "parts": [
+        { "label": "출력 결과", "answers": ["3 7\n2800"] }
+      ],
+      "explanation": "(p + i)->qty 는 arr[i].qty 와 같다. 각 항목의 qty*price 는 600, 500, 900, 600 이므로 가장 큰 항목은 idx=2(id 3)이다. swap 은 구조체 포인터로 구조체 전체를 복사하므로 arr[0] 과 arr[2] 가 통째로 바뀌어 arr 은 {3,2,450},{2,5,100},{1,3,200},{4,4,150} 이 된다. p++ 로 p 는 arr[1] 을 가리키고 p->qty += 2 로 arr[1].qty 는 7 이 되어 첫 줄은 3 7 이다. total 은 2*450 + 7*100 + 3*200 + 4*150 = 900+700+600+600 = 2800 이다. 구조체 포인터는 ++ 시 구조체 크기만큼 이동하므로 다음 원소를 가리킨다는 점이 핵심이다.",
+      "difficulty": "중",
+      "selfCheck": "손 추적: 금액 600/500/900/600 → idx=2 → swap 후 arr[0].id=3, p++ 후 arr[1].qty=5+2=7, total=900+700+600+600=2800. JS 이식(gen/c/p1.js, 포인터→인덱스, 구조체→객체 복사) 실행 결과 '3 7' / '2800' 으로 일치. UB 점검: 배열 범위 0~3 내, 모든 변수 초기화, 한 식에서 같은 변수 중복 수정 없음."
+    },
+    {
+      "subtopic": "2차원 배열 전치·행 반전으로 회전 후 대각선 합",
+      "type": "code",
+      "language": "C",
+      "question": "다음 C언어 코드의 출력 결과를 쓰시오.",
+      "code": "#include <stdio.h>\n\nvoid rotate(int m[][3]) {\n    int i, j, t;\n    for (i = 0; i < 3; i++) {\n        for (j = i + 1; j < 3; j++) {\n            t = m[i][j];\n            m[i][j] = m[j][i];\n            m[j][i] = t;\n        }\n    }\n    for (i = 0; i < 3; i++) {\n        t = m[i][0];\n        m[i][0] = m[i][2];\n        m[i][2] = t;\n    }\n}\n\nint main() {\n    int m[3][3] = { {3, 1, 4}, {1, 5, 9}, {2, 6, 5} };\n    int i, d1 = 0, d2 = 0;\n    rotate(m);\n    for (i = 0; i < 3; i++) {\n        d1 += m[i][i];\n        d2 += m[i][2 - i];\n    }\n    printf(\"%d\", m[1][0]);\n    for (i = 1; i < 3; i++)\n        printf(\" %d\", m[1][i]);\n    printf(\"\\n\");\n    printf(\"%d %d\\n\", d1, d2);\n    return 0;\n}\n",
+      "parts": [
+        { "label": "출력 결과", "answers": ["6 5 1\n11 13"] }
+      ],
+      "explanation": "rotate 의 첫 번째 이중 반복은 j 가 i+1 부터 시작하므로 주대각선 위쪽 원소만 아래쪽과 교환하여 전치(transpose)를 수행한다. 전치 결과는 {3,1,2},{1,5,6},{4,9,5} 이다. 두 번째 반복은 각 행의 0열과 2열을 바꾸므로 {2,1,3},{6,5,1},{5,9,4} 가 되며, 이는 원본을 시계 방향으로 90도 회전한 것과 같다. 2차원 배열은 함수에 전달해도 원본이 직접 수정된다. 1행은 6 5 1 이고, 주대각선 합 d1 = 2+5+4 = 11, 반대각선 합 d2 = m[0][2]+m[1][1]+m[2][0] = 3+5+5 = 13 이다.",
+      "difficulty": "하",
+      "selfCheck": "손 추적: 전치 {3,1,2},{1,5,6},{4,9,5} → 열 반전 {2,1,3},{6,5,1},{5,9,4} → m[1]=6 5 1, d1=11, d2=13. JS 이식(gen/c/p2.js) 실행 결과 '6 5 1' / '11 13' 으로 일치. 출력 형식은 첫 원소 뒤에만 ' %d' 를 붙여 끝 공백이 없음."
+    },
+    {
+      "subtopic": "문자열 길이·역순 함수 직접 구현과 ASCII 연산(대소문자 변환, 숫자 문자 합)",
+      "type": "code",
+      "language": "C",
+      "question": "다음 C언어 코드의 출력 결과를 쓰시오.",
+      "code": "#include <stdio.h>\n\nint len(char *s) {\n    int n = 0;\n    while (*s++)\n        n++;\n    return n;\n}\n\nvoid reverse(char *s) {\n    int i = 0, j = len(s) - 1;\n    while (i < j) {\n        char t = s[i];\n        s[i] = s[j];\n        s[j] = t;\n        i++;\n        j--;\n    }\n}\n\nint main() {\n    char str[] = \"Abc12xY3\";\n    int sum = 0, up = 0, i;\n    for (i = 0; str[i] != '\\0'; i++) {\n        if (str[i] >= '0' && str[i] <= '9') {\n            sum += str[i] - '0';\n            str[i] = '*';\n        } else if (str[i] >= 'a' && str[i] <= 'z') {\n            str[i] = str[i] - 'a' + 'A';\n            up++;\n        } else if (str[i] >= 'A' && str[i] <= 'Z') {\n            str[i] = str[i] + ('a' - 'A');\n        }\n    }\n    reverse(str);\n    printf(\"%s\\n\", str);\n    printf(\"%d %d %d\\n\", sum, up, len(str));\n    return 0;\n}\n",
+      "parts": [
+        { "label": "출력 결과", "answers": ["*yX**CBa\n6 3 8"] }
+      ],
+      "explanation": "숫자 문자에서 '0' 을 빼면 실제 숫자 값이 되므로 1, 2, 3 이 더해져 sum = 6 이고 해당 자리는 '*' 로 바뀐다. 소문자는 - 'a' + 'A' 로 대문자가 되며 b, c, x 세 개가 바뀌어 up = 3 이고, 대문자 A, Y 는 + 32 로 소문자가 된다. 변환 후 문자열은 \"aBC**Xy*\" 이다. len 은 널 문자를 만날 때까지 포인터를 전진시키며 세므로 8 을 반환하고, reverse 는 양끝에서 교환하여 \"*yX**CBa\" 가 된다. 문자열 길이는 역순으로 바뀌어도 그대로 8 이다.",
+      "difficulty": "중",
+      "selfCheck": "손 추적: A→a, b→B(up1), c→C(up2), 1→*(sum1), 2→*(sum3), x→X(up3), Y→y, 3→*(sum6) → \"aBC**Xy*\" → 역순 \"*yX**CBa\", len=8. JS 이식(gen/c/p3.js, char 를 코드값 배열+0 종단으로 표현) 실행 결과 '*yX**CBa' / '6 3 8' 으로 일치. UB 점검: char 대입값은 모두 ASCII 범위(42~121) 내, 배열 범위 내, 널 종단 유지."
+    },
+    {
+      "subtopic": "do-while 안의 continue·break 와 switch-case fallthrough 흐름",
+      "type": "code",
+      "language": "C",
+      "question": "다음 C언어 코드의 출력 결과를 쓰시오.",
+      "code": "#include <stdio.h>\n\nint main() {\n    int i = 0, a = 0, b = 0, c = 0;\n    do {\n        i++;\n        if (i % 4 == 0)\n            continue;\n        switch (i % 3) {\n            case 0:\n                a += i;\n            case 1:\n                b += i;\n                break;\n            case 2:\n                c += i;\n                if (c > 5)\n                    break;\n                a++;\n        }\n        if (a + b + c > 40)\n            break;\n    } while (i < 10);\n    printf(\"%d %d %d\\n\", a, b, c);\n    printf(\"%d\\n\", i);\n    return 0;\n}\n",
+      "parts": [
+        { "label": "출력 결과", "answers": ["19 26 7\n9"] }
+      ],
+      "explanation": "do-while 에서 continue 는 조건식 검사로 바로 넘어가므로 i 가 4, 8 일 때는 switch 와 합계 검사를 건너뛴다. case 0 에는 break 가 없어 a += i 후 case 1 의 b += i 까지 실행되는 fallthrough 가 일어난다. case 2 의 if 안에 있는 break 는 switch 만 빠져나가므로 c 가 5 를 넘는 i=5 부터는 a++ 가 실행되지 않는다. 추적하면 i=1: b=1, i=2: c=2,a=1, i=3: a=4,b=4, i=5: c=7, i=6: a=10,b=10, i=7: b=17, i=9: a=19,b=26 이 되고 합이 52 로 40 을 넘어 switch 밖의 break 로 반복문을 종료한다. 따라서 a b c 는 19 26 7, i 는 9 이다.",
+      "difficulty": "상",
+      "selfCheck": "손 추적표(gen/c/trace.md P4): i=1~9 단계별 a,b,c 와 합계 기록, i=4·8 은 continue, i=5 는 c=7>5 로 switch break 하여 a++ 미실행, i=9 에서 합 52>40 으로 루프 break. JS 이식(gen/c/p4.js, 라벨 break 로 switch/loop break 구분, do-while continue 의미 동일) 실행 결과 '19 26 7' / '9' 로 일치."
+    },
+    {
+      "subtopic": "함수 포인터 배열로 연산 선택 호출",
+      "type": "code",
+      "language": "C",
+      "question": "다음 C언어 코드의 출력 결과를 쓰시오.",
+      "code": "#include <stdio.h>\n\nint add(int a, int b) { return a + b; }\nint mul(int a, int b) { return a * b; }\nint sub(int a, int b) { return a - b; }\n\nint apply(int (*f)(int, int), int x, int y) {\n    return f(x, y);\n}\n\nint main() {\n    int (*ops[3])(int, int) = { add, mul, sub };\n    int data[6] = { 2, 5, 1, 4, 3, 7 };\n    int cnt[3] = { 0, 0, 0 };\n    int r = 1, i;\n    for (i = 0; i < 6; i++) {\n        int k = data[i] % 3;\n        r = apply(ops[k], r, data[i]);\n        cnt[k]++;\n    }\n    printf(\"%d\\n\", r);\n    printf(\"%d %d %d\\n\", cnt[0], cnt[1], cnt[2]);\n    return 0;\n}\n",
+      "parts": [
+        { "label": "출력 결과", "answers": ["-147\n1 3 2"] }
+      ],
+      "explanation": "int (*ops[3])(int, int) 는 int 두 개를 받아 int 를 반환하는 함수 포인터 3개짜리 배열이며, ops[k] 를 apply 에 넘기면 f(x, y) 로 해당 함수가 호출된다. 선택 기준은 data[i] % 3 으로 0이면 add, 1이면 mul, 2이면 sub 이다. r 은 1 에서 시작하여 sub(1,2)=-1, sub(-1,5)=-6, mul(-6,1)=-6, mul(-6,4)=-24, add(-24,3)=-21, mul(-21,7)=-147 로 변한다. 사용된 k 는 2,2,1,1,0,1 이므로 cnt 는 1 3 2 이다. 배열 초기화 순서가 add, mul, sub 이지 add, sub, mul 이 아니라는 점에 주의해야 한다.",
+      "difficulty": "중",
+      "selfCheck": "손 추적표(gen/c/trace.md P5): data 2,5,1,4,3,7 → k 2,2,1,1,0,1 → r 1→-1→-6→-6→-24→-21→-147, cnt[0]=1, cnt[1]=3, cnt[2]=2. JS 이식(gen/c/p5.js) 실행 결과 '-147' / '1 3 2' 로 일치. UB 점검: data 값 모두 양수라 % 결과 0~2 로 ops 범위 내, 곱셈 최대 절댓값 147 로 오버플로 없음."
+    },
+    {
+      "subtopic": "#define 매크로 텍스트 치환과 연산자 우선순위, 전위·후위 증감 복합 대입",
+      "type": "code",
+      "language": "C",
+      "question": "다음 C언어 코드의 출력 결과를 쓰시오.",
+      "code": "#include <stdio.h>\n\n#define N 2 + 3\n#define SQUARE(x) x * x\n#define HALF(x) x / 2\n#define CUBE(x) ((x) * (x) * (x))\n\nint main() {\n    int a = 4, b = 9;\n    int r1 = N * N;\n    int r2 = SQUARE(a + 1);\n    int r3 = 36 / HALF(b - 3);\n    int r4 = CUBE(a - 1) - SQUARE(a) / 2;\n    int x = 5;\n    int y = x++ * 2;\n    y += ++x - N;\n    printf(\"%d %d %d %d\\n\", r1, r2, r3, r4);\n    printf(\"%d %d\\n\", x, y);\n    return 0;\n}\n",
+      "parts": [
+        { "label": "출력 결과", "answers": ["11 9 3 19\n7 18"] }
+      ],
+      "explanation": "매크로는 계산이 아니라 텍스트 치환이므로 괄호가 없으면 우선순위가 달라진다. N * N 은 2 + 3 * 2 + 3 = 11 이고, SQUARE(a + 1) 은 a + 1 * a + 1 = 4 + 4 + 1 = 9 이다. 36 / HALF(b - 3) 은 36 / b - 3 / 2 로 치환되어 36/9 - 3/2 = 4 - 1 = 3 이 된다(정수 나눗셈). CUBE 는 괄호가 완전하므로 (a-1)의 세제곱 27 이고, SQUARE(a) / 2 는 a * a / 2 = 8 이므로 r4 = 19 이다. y = x++ * 2 는 증가 전 값 5 를 써서 y = 10, x = 6 이 되고, y += ++x - N 은 y += ++x - 2 + 3 으로 치환되어 x = 7, y = 10 + (7 - 2 + 3) = 18 이 된다.",
+      "difficulty": "상",
+      "selfCheck": "손 추적(gen/c/trace.md P6): 전처리기 치환 결과를 그대로 적어 r1=2+3*2+3=11, r2=a+1*a+1=9, r3=36/b-3/2=4-1=3, r4=27-16/2=19, y=5*2=10·x=6, y+=++x-2+3 → x=7, y=18. JS 이식(gen/c/p6.js, 매크로를 손으로 전개한 식을 그대로 코딩, 정수 나눗셈은 Math.trunc) 실행 결과 '11 9 3 19' / '7 18' 로 일치. UB 점검: 매크로 인자에 증감 연산자 없음, 한 식에서 x 또는 y 가 각각 한 번만 수정됨, 모든 변수 초기화."
+    }
+  ]
+}

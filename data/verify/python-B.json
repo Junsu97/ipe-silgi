@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "index": 0,
+      "verdict": "pass",
+      "reason": "손 추적: sq=[9,23,13,5,39,15] → ev=[9,39,15]. w1=sorted(key=len) 안정 정렬로 [fig,kiwi,apple,banana,cherry] → fig cherry. w2=끝글자(i,e,g,a,y) 내림차순 → [cherry,kiwi,fig,apple,banana] → cherry fig (끝글자 전부 달라 안정성 무관). total=1+3+1+0+5+2=12, max(key=x%7) 나머지 (5,5,0,3,6,1) → 유일 최대 20. 출력 「[9, 39, 15] / fig cherry / cherry fig / 12 20」= answers 일치. Node 이식 실행도 동일. 정의·호출 순서·import 문제 없음.",
+      "extraAnswers": [],
+      "note": "변수명 sq(제곱 아님)·ev(짝수 아님)가 의미와 어긋나 수험생을 헷갈리게 할 수 있음. 정답엔 영향 없음."
+    },
+    {
+      "index": 1,
+      "verdict": "pass",
+      "reason": "손 추적: b=a 별칭, c=a[:] 복사. append(9)→a=[3,1,4,1,5,9]; c.insert(0,7)→c=[7,3,1,4,1,5]; r1=a.pop()=9→a=[3,1,4,1,5]; r2=c.pop(1)=3→c=[7,1,4,1,5]; a.remove(1) 첫 1만 제거→a=[3,4,1,5]; c.extend([2,6])→c=[7,1,4,1,5,2,6]; idx=a.index(4)=1; d=a; d+=[8] 는 list.__iadd__ in-place→a=d=[3,4,1,5,8]; e=c; e=e+[0] 새 객체→c 불변, e 8개. 출력 「[3, 4, 1, 5, 8] / [7, 1, 4, 1, 5, 2, 6] / 9 3 1 / True False 8」= answers 일치. Node 교차 확인 동일.",
+      "extraAnswers": [],
+      "note": ""
+    },
+    {
+      "index": 2,
+      "verdict": "pass",
+      "reason": "손 추적: sa∩sb={8,16,42}→[8, 16, 42]; 합집합 {4,8,15,16,23,24,42,50} 8개; sa-sb={4,15,23}→diff[-1]=23; sa^sb={4,15,23,24,50}→sym[0]=4. enumerate 짝수: (0,4),(1,8),(3,16),(5,42) 4개, 0+8+48+210=266. zip 딕셔너리 컴프리헨션 s>=80 → {'bob': 85, 'cy': 90} (삽입 순서 유지, 작은따옴표·「: 」 형식). 출력 4줄 모두 answers 일치. set 은 전부 sorted 로 리스트화해 출력하므로 순서 비결정성 없음. Node 교차 확인 동일.",
+      "extraAnswers": [],
+      "note": ""
+    },
+    {
+      "index": 3,
+      "verdict": "pass",
+      "reason": "스코프 점검: step 안 total 은 지역 변수이며 읽기 전에 대입하므로 UnboundLocalError 없음; count 는 global 선언 후 += 로 정상. 손 추적: search(3): step(1..3)=3,6,9 모두 7 비배수 → while 정상 종료 → else return -1 (count=3). search(10): count 3부터 step(1..6)=6,9,12,15,18,21 → 21%7==0 → i=6 에서 break → else 건너뜀 → return 6 (count=9). 전역 total=10 불변. divmod(2**9+10,7)=divmod(522,7)=(74,4) (7*74=518). 출력 「-1 6 / 9 10 / 74 4」= answers 일치. Node 교차 확인 동일.",
+      "extraAnswers": [],
+      "note": ""
+    }
+  ]
+}

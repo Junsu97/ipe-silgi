@@ -1,0 +1,577 @@
+<title>정보처리기사 실기 모의고사</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 모바일 우선 단일 열. 상단 고정 바 + 본문 + 하단 탭바(홈·해설집·개념정리). 시험 중에는 탭바 대신 이전/다음 바. 데스크톱은 720px 중앙 정렬. */
+:root {
+  --paper: #f8f8f5; --paper-2: #efefe9; --paper-3: #e6e7e0;
+  --ink: #1d2433; --ink-2: #4b5468; --ink-3: #8a91a3; --rule: #d4d6cf;
+  --accent: #1f4e8c; --accent-ink: #ffffff; --accent-soft: #e4ecf7;
+  --pen: #c8322b; --pen-soft: #fbe9e7;
+  --ok: #2d7a4f; --ok-soft: #e3f2e8;
+  --code-bg: #f1f2ef; --focus: #3b82f6; --shadow: 0 -1px 0 var(--rule);
+  --display: 'Gowun Batang', 'Nanum Myeongjo', serif;
+  --body: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --mono: 'IBM Plex Mono', 'D2Coding', Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #15181f; --paper-2: #1d212b; --paper-3: #262b38; --ink: #e8e9ee; --ink-2: #b3b8c6; --ink-3: #7c8396; --rule: #2e3340;
+    --accent: #8db4ea; --accent-ink: #0f1a2b; --accent-soft: #1f2b3f; --pen: #f07a72; --pen-soft: #3a2220;
+    --ok: #7fcf9b; --ok-soft: #1f3327; --code-bg: #0f1218; --focus: #7fb0ff; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #15181f; --paper-2: #1d212b; --paper-3: #262b38; --ink: #e8e9ee; --ink-2: #b3b8c6; --ink-3: #7c8396; --rule: #2e3340;
+  --accent: #8db4ea; --accent-ink: #0f1a2b; --accent-soft: #1f2b3f; --pen: #f07a72; --pen-soft: #3a2220;
+  --ok: #7fcf9b; --ok-soft: #1f3327; --code-bg: #0f1218; --focus: #7fb0ff; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; overscroll-behavior-y: none; }
+button { font: inherit; cursor: pointer; color: inherit; -webkit-tap-highlight-color: transparent; }
+button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+[hidden] { display: none !important; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+.app { max-width: 720px; margin: 0 auto; min-height: 100%; }
+
+/* 상단 바 */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--paper); border-bottom: 1px solid var(--rule); }
+.top::before { content: ''; position: absolute; left: 0; right: 0; bottom: 100%; height: env(safe-area-inset-top, 0px); background: var(--paper); }
+.top-in { display: flex; align-items: center; gap: 8px; min-height: 52px; padding-inline: 12px; }
+.top-title { font-weight: 700; font-size: 16px; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.top-sub { font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.icon-btn { border: 1px solid var(--rule); background: var(--paper-2); border-radius: 8px; min-width: 40px; height: 38px; padding: 0 10px; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
+.icon-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.icon-btn:active { background: var(--paper-3); }
+.icon-btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 500; }
+
+/* 본문 */
+.view { padding-inline: 16px; padding-block: 16px calc(84px + env(safe-area-inset-bottom, 0px)); }
+.view.exam { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+.eyebrow { font-size: 12px; letter-spacing: .08em; color: var(--ink-2); text-transform: uppercase; }
+.h-display { font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1.25; }
+.muted { color: var(--ink-2); font-size: 14px; }
+.section { display: grid; gap: 10px; margin-top: 22px; }
+.section-h { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.section-h h2 { font-size: 15px; font-weight: 700; color: var(--ink-2); letter-spacing: .02em; }
+.link-btn { border: none; background: none; color: var(--accent); font-size: 13.5px; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px; }
+
+/* 버튼 */
+.btn { min-height: 44px; border: 1px solid var(--rule); background: var(--paper-2); color: var(--ink); padding: 11px 14px; border-radius: 10px; font-size: 15px; line-height: 1.2; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.btn:active { background: var(--paper-3); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 500; }
+.btn.quiet { background: transparent; }
+.btn.danger { color: var(--pen); }
+.btn:disabled { opacity: .45; cursor: default; }
+.btn.block { width: 100%; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn-row .btn { flex: 1 1 auto; }
+
+/* 카드 (세트) */
+.set-card { border: 1px solid var(--rule); border-radius: 12px; padding: 14px 16px; display: grid; gap: 10px; background: var(--paper-2); }
+.set-card .name { font-family: var(--display); font-size: 20px; font-weight: 700; }
+.set-card .stat { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.pill { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; border-radius: 999px; padding: 2px 10px; border: 1px solid var(--rule); background: var(--paper); color: var(--ink-2); }
+.pill.pass { color: var(--ok); background: var(--ok-soft); border-color: var(--ok); }
+.pill.fail { color: var(--pen); background: var(--pen-soft); border-color: var(--pen); }
+.pill.live { color: var(--accent); background: var(--accent-soft); border-color: var(--accent); }
+.progress { height: 6px; background: var(--paper-3); border-radius: 3px; overflow: hidden; }
+.progress i { display: block; height: 100%; background: var(--accent); width: 0; }
+
+/* 기록 */
+.hist { display: grid; gap: 0; border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; }
+.hist-row { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; padding: 10px 14px; border-top: 1px solid var(--rule); font-size: 14px; font-variant-numeric: tabular-nums; background: var(--paper-2); }
+.hist-row:first-child { border-top: none; }
+.hist-row .d { color: var(--ink-3); font-size: 12.5px; }
+.hist-row b { font-size: 16px; }
+.empty { border: 1px dashed var(--rule); border-radius: 12px; padding: 18px; text-align: center; color: var(--ink-3); font-size: 14px; }
+
+/* 문항 */
+.q-head { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; margin-bottom: 10px; }
+.q-num { font-family: var(--display); font-weight: 700; font-size: 24px; font-variant-numeric: tabular-nums; line-height: 1; }
+.chip { font-size: 12px; color: var(--ink-2); border: 1px solid var(--rule); border-radius: 999px; padding: 1px 9px; background: var(--paper-2); }
+.q-points { margin-left: auto; font-size: 12px; color: var(--ink-3); }
+.q-text { font-size: 16px; }
+.q-text p { margin: 0 0 8px; }
+.q-text p:last-child { margin-bottom: 0; }
+.q-text code, .key code { font-family: var(--mono); font-size: .9em; background: var(--code-bg); padding: 1px 5px; border-radius: 3px; }
+.q-text ul { margin: 4px 0 8px; padding-left: 20px; }
+.tbl-wrap, .code-wrap { overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; }
+table.data { border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; margin: 6px 0 10px; }
+table.data th, table.data td { border: 1px solid var(--rule); padding: 5px 10px; text-align: left; white-space: nowrap; }
+table.data th { background: var(--paper-2); font-weight: 500; }
+pre.code { margin: 8px 0 0; background: var(--code-bg); border: 1px solid var(--rule); border-radius: 8px; padding: 12px 12px; font-family: var(--mono); font-size: 13px; line-height: 1.55; tab-size: 4; counter-reset: ln; }
+pre.code .ln { display: block; white-space: pre; }
+pre.code .ln::before { counter-increment: ln; content: counter(ln); display: inline-block; width: 2em; margin-right: .9em; text-align: right; color: var(--ink-3); user-select: none; }
+.code-lang { font-size: 11px; letter-spacing: .06em; color: var(--ink-3); text-transform: uppercase; margin-top: 12px; font-family: var(--mono); }
+
+/* 답안란 */
+.answers { display: grid; gap: 10px; margin-top: 16px; }
+.part { display: grid; gap: 4px; }
+.part-label { font-size: 13px; color: var(--ink-2); }
+.part input, .part textarea { width: 100%; font: inherit; font-size: 16px; color: var(--ink); background: var(--paper); border: 1.5px solid var(--ink-3); border-radius: 10px; padding: 11px 12px; }
+.part textarea { font-family: var(--mono); font-size: 15px; line-height: 1.5; min-height: 84px; resize: vertical; }
+.part input:read-only, .part textarea:read-only { background: var(--paper-2); border-color: var(--rule); }
+.part input::placeholder, .part textarea::placeholder { color: var(--ink-3); }
+.q[data-state="correct"] .part input, .q[data-state="correct"] .part textarea { border-color: var(--ok); }
+.q[data-state="wrong"] .part input, .q[data-state="wrong"] .part textarea { border-color: var(--pen); }
+.q-actions { display: grid; gap: 8px; margin-top: 14px; }
+.q-actions .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.status-line { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); min-height: 24px; }
+
+/* 채점 표시 */
+.mark { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 15px; }
+.mark .glyph { width: 24px; height: 24px; display: inline-grid; place-items: center; border-radius: 50%; position: relative; }
+.mark.correct { color: var(--pen); }
+.mark.correct .glyph { border: 2.5px solid var(--pen); }
+.mark.wrong { color: var(--pen); }
+.mark.wrong .glyph::before { content: ''; position: absolute; left: 50%; top: 2px; bottom: 2px; width: 2.5px; background: var(--pen); transform: rotate(30deg); border-radius: 2px; }
+.mark.none { color: var(--ink-3); font-weight: 500; }
+
+/* 정답·해설 */
+.key { border-left: 3px solid var(--accent); background: var(--paper-2); padding: 12px 14px; display: grid; gap: 10px; border-radius: 0 10px 10px 0; margin-top: 14px; }
+.key-row { display: grid; gap: 2px; font-size: 14.5px; }
+.key-row .k { color: var(--ink-2); font-size: 12.5px; }
+.key-answer { font-weight: 700; font-family: var(--mono); white-space: pre-wrap; word-break: break-word; font-size: 15px; }
+.key-alt { color: var(--ink-3); font-size: 12.5px; }
+.key-exp { white-space: pre-wrap; }
+.my-answer { font-family: var(--mono); white-space: pre-wrap; word-break: break-word; }
+
+/* 시험 하단 바 */
+.exam-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--paper); border-top: 1px solid var(--rule); padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px)); }
+.exam-bar-in { max-width: 720px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; }
+.exam-bar .btn { height: 46px; }
+.exam-bar .grid-btn { min-width: 110px; font-variant-numeric: tabular-nums; font-weight: 500; }
+
+/* 하단 탭바 */
+.tabbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--paper); border-top: 1px solid var(--rule); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.tabbar-in { max-width: 720px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); }
+.tab { border: none; background: none; padding: 9px 4px 8px; display: grid; justify-items: center; gap: 2px; font-size: 11.5px; color: var(--ink-3); }
+.tab svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tab[aria-selected="true"] { color: var(--accent); font-weight: 700; }
+
+/* 시트(문항 번호판·확인) */
+.sheet-bg { position: fixed; inset: 0; z-index: 30; background: rgba(0,0,0,.35); display: grid; align-items: end; }
+.sheet { background: var(--paper); border-radius: 16px 16px 0 0; padding: 14px 16px calc(18px + env(safe-area-inset-bottom, 0px)); max-width: 720px; width: 100%; margin: 0 auto; max-height: 80vh; overflow: auto; display: grid; gap: 12px; }
+.sheet-h { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.sheet-h h3 { font-size: 16px; }
+.cells { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.cell { height: 48px; border: 1px solid var(--rule); border-radius: 10px; background: var(--paper-2); color: var(--ink-2); font-size: 15px; font-variant-numeric: tabular-nums; display: grid; place-items: center; }
+.cell[data-state="locked"] { background: var(--accent-soft); color: var(--ink); border-color: var(--accent); font-weight: 500; }
+.cell[data-state="shown"] { border-style: dashed; color: var(--ink-3); }
+.cell[data-state="correct"] { background: var(--ok-soft); color: var(--ok); border-color: var(--ok); font-weight: 700; }
+.cell[data-state="wrong"] { background: var(--pen-soft); color: var(--pen); border-color: var(--pen); font-weight: 700; }
+.cell[aria-current="true"] { outline: 2px solid var(--ink); outline-offset: 1px; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--ink-3); }
+.legend i { display: inline-block; width: 10px; height: 10px; border: 1px solid var(--rule); border-radius: 2px; vertical-align: -1px; margin-right: 4px; }
+.legend .l-locked { background: var(--accent-soft); border-color: var(--accent); }
+.legend .l-shown { border-style: dashed; }
+.legend .l-correct { background: var(--ok-soft); border-color: var(--ok); }
+.legend .l-wrong { background: var(--pen-soft); border-color: var(--pen); }
+
+/* 결과 */
+.result-card { border: 1px solid var(--ink); border-radius: 14px; padding: 18px; display: grid; gap: 12px; background: var(--paper-2); }
+.score { font-family: var(--display); font-size: 52px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.score small { font-size: 18px; font-family: var(--body); font-weight: 400; color: var(--ink-2); margin-left: 4px; }
+.verdict { font-size: 16px; font-weight: 700; padding: 4px 12px; border-radius: 8px; display: inline-block; }
+.verdict.pass { color: var(--ok); background: var(--ok-soft); }
+.verdict.fail { color: var(--pen); background: var(--pen-soft); }
+.by-topic { display: grid; gap: 6px; font-size: 14px; font-variant-numeric: tabular-nums; }
+.by-topic div { display: grid; grid-template-columns: 1fr auto; gap: 10px; border-bottom: 1px dotted var(--rule); padding-block: 4px; }
+.result-cells { display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; }
+.result-cells .cell { height: 34px; font-size: 13px; border-radius: 7px; }
+
+/* 세그먼트·칩 */
+.seg { display: flex; gap: 6px; flex-wrap: wrap; }
+.seg button { border: 1px solid var(--rule); background: var(--paper-2); border-radius: 999px; padding: 6px 13px; font-size: 14px; color: var(--ink-2); }
+.seg button[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); font-weight: 500; }
+.chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px; }
+.chips::-webkit-scrollbar { display: none; }
+.chips button { flex: 0 0 auto; border: 1px solid var(--rule); background: var(--paper-2); border-radius: 999px; padding: 7px 14px; font-size: 14px; color: var(--ink-2); white-space: nowrap; }
+.chips button[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 500; }
+
+/* 해설집 항목 */
+.key-item { scroll-margin-top: calc(64px + env(safe-area-inset-top, 0px)); border: 1px solid var(--rule); border-radius: 12px; background: var(--paper-2); overflow: hidden; }
+.key-item > summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: start; }
+.key-item > summary::-webkit-details-marker { display: none; }
+.key-item .n { font-family: var(--display); font-weight: 700; font-size: 18px; min-width: 1.6em; }
+.key-item .t { font-size: 14.5px; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.key-item .t small { display: block; color: var(--ink-3); font-size: 12px; margin-bottom: 2px; }
+.key-item .body { padding: 0 14px 14px; border-top: 1px solid var(--rule); background: var(--paper); }
+.key-item .body .q-text { margin-top: 12px; }
+.key-item .key { margin-top: 12px; }
+
+/* 개념정리 */
+.note-card { border: 1px solid var(--rule); border-radius: 12px; background: var(--paper-2); overflow: hidden; }
+.note-card > summary { list-style: none; cursor: pointer; padding: 12px 14px; font-weight: 700; font-size: 15.5px; display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.note-card > summary::-webkit-details-marker { display: none; }
+.note-card > summary::after { content: '▾'; color: var(--ink-3); font-size: 14px; transition: transform .15s; }
+.note-card[open] > summary::after { transform: rotate(180deg); }
+.note-card .body { padding: 0 14px 14px; background: var(--paper); border-top: 1px solid var(--rule); }
+.note-card ul { margin: 12px 0 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14.5px; }
+.note-card .note { margin-top: 10px; font-size: 13.5px; color: var(--ink-2); border-left: 3px solid var(--accent); padding-left: 10px; }
+.note-card table.data { margin-top: 12px; }
+.note-card table.data td, .note-card table.data th { white-space: normal; min-width: 72px; }
+.note-card table.data td:first-child { white-space: nowrap; font-weight: 500; }
+.intro { font-size: 14.5px; color: var(--ink-2); border-left: 3px solid var(--rule); padding-left: 10px; }
+
+.foot { margin-top: 36px; font-size: 12.5px; color: var(--ink-3); line-height: 1.6; }
+@media (pointer: coarse) { body.typing .exam-bar { display: none; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+@media (max-width: 420px) { pre.code { font-size: 12.5px; padding: 10px; } pre.code .ln::before { width: 1.6em; margin-right: .7em; } }
+@media (min-width: 600px) { .cells { grid-template-columns: repeat(10, 1fr); } .cell { height: 44px; } }
+</style>
+
+<div class="app">
+  <header class="top" id="top"></header>
+  <main class="view" id="view"></main>
+  <nav class="tabbar" id="tabbar" aria-label="주 메뉴">
+    <div class="tabbar-in">
+      <button class="tab" type="button" data-tab="home" role="tab"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg>모의고사</button>
+      <button class="tab" type="button" data-tab="key" role="tab"><svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5z"/><path d="M8 10h8M8 14h8M8 18h5"/></svg>해설집</button>
+      <button class="tab" type="button" data-tab="notes" role="tab"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5V5.5M8 7h8M8 11h6"/></svg>개념정리</button>
+    </div>
+  </nav>
+  <div id="sheet" hidden></div>
+</div>
+
+<script>
+const SETS = /*SETS*/[]/*END*/;
+const NOTES = /*NOTES*/[]/*END*/;
+const PWA = /*PWA*/false/*PWA_END*/;
+const POINTS = 5;
+const ICON_BACK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
+const ICON_CLOSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+const PASS = 60;
+const TIME_LIMIT_MIN = 150;
+
+// ---------- 유틸 ----------
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const normShort = s => String(s ?? '').normalize('NFC').toLowerCase().replace(/[\s ]/g, '').replace(/[.\-_·/()\[\]{}'"‘’“”,:;!?~→⇒>]/g, '');
+const normCode = s => String(s ?? '').normalize('NFC').replace(/\r/g, '').split('\n').map(l => l.replace(/[ \t\u00a0]+/g, ' ').trim().replace(/\s*([,\[\](){}:])\s*/g, '$1')).filter(l => l.length).join('\n');
+function isMatch(q, part, value) {
+  const v = String(value ?? '');
+  if (!v.trim()) return false;
+  if (q.type === 'code') { const a = normCode(v); return part.answers.some(x => normCode(x) === a); }
+  const a = normShort(v); if (!a) return false;
+  return part.answers.some(x => normShort(x) === a);
+}
+const fmtDate = ts => { const d = new Date(ts); return (d.getMonth() + 1) + '월 ' + d.getDate() + '일 ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
+const fmtSec = s => { s = Math.max(0, Math.floor(s)); const m = Math.floor(s / 60), h = Math.floor(m / 60); return (h ? h + ':' : '') + String(m % 60).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); };
+const setOf = key => SETS.find(s => s.key === key) || SETS[0];
+const inlineMd = s => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>');
+
+function renderText(text) {
+  const lines = String(text ?? '').replace(/\r/g, '').split('\n'); const out = []; let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    if (/^\s*```/.test(line)) { const buf = []; i++; while (i < lines.length && !/^\s*```/.test(lines[i])) { buf.push(lines[i]); i++; } i++;
+      out.push('<div class="code-wrap"><pre class="code">' + buf.map(l => '<span class="ln">' + esc(l) + '</span>').join('') + '</pre></div>'); continue; }
+    if (/^\s*\|/.test(line)) { const rows = []; while (i < lines.length && /^\s*\|/.test(lines[i])) { rows.push(lines[i]); i++; }
+      const cells = r => r.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim());
+      const body = rows.filter(r => !/^\s*\|?\s*:?-{2,}/.test(r));
+      if (body.length) { let html = '<div class="tbl-wrap"><table class="data"><thead><tr>' + cells(body[0]).map(c => '<th>' + inlineMd(c) + '</th>').join('') + '</tr></thead><tbody>';
+        for (const r of body.slice(1)) html += '<tr>' + cells(r).map(c => '<td>' + inlineMd(c) + '</td>').join('') + '</tr>';
+        out.push(html + '</tbody></table></div>'); } continue; }
+    if (/^\s*[-*•]\s+/.test(line)) { const items = []; while (i < lines.length && /^\s*[-*•]\s+/.test(lines[i])) { items.push(lines[i].replace(/^\s*[-*•]\s+/, '')); i++; }
+      out.push('<ul>' + items.map(t => '<li>' + inlineMd(t) + '</li>').join('') + '</ul>'); continue; }
+    if (!line.trim()) { i++; continue; }
+    const buf = []; while (i < lines.length && lines[i].trim() && !/^\s*(```|\||[-*•]\s)/.test(lines[i])) { buf.push(lines[i]); i++; }
+    out.push('<p>' + buf.map(inlineMd).join('<br>') + '</p>');
+  }
+  return out.join('');
+}
+function renderCode(q) {
+  if (!q.code) return '';
+  return '<div class="code-lang">' + esc(q.language || 'code') + '</div><div class="code-wrap"><pre class="code">' + String(q.code).replace(/\r/g, '').replace(/\n+$/, '').split('\n').map(l => '<span class="ln">' + esc(l) + '</span>').join('') + '</pre></div>';
+}
+function firstLine(q) { const t = String(q.question).split('\n').find(l => l.trim() && !/^\s*[|`#-]/.test(l)) || ''; return t.length > 80 ? t.slice(0, 80) + '…' : t; }
+
+// ---------- 저장소 ----------
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+  del(k) { try { localStorage.removeItem(k); } catch (e) {} },
+};
+const K = { att: k => 'ipe2.attempt.' + k, hist: 'ipe2.history', ui: 'ipe2.ui' };
+let ui = Object.assign({ view: 'home', setKey: SETS[0].key, qi: 0, keySet: SETS[0].key, keyFilter: 'all', notesArea: NOTES[0] ? NOTES[0].key : '' }, store.get(K.ui, {}));
+if (!SETS.find(s => s.key === ui.setKey)) ui.setKey = SETS[0].key;
+if (!SETS.find(s => s.key === ui.keySet)) ui.keySet = SETS[0].key;
+if (!NOTES.find(n => n.key === ui.notesArea)) ui.notesArea = NOTES[0] ? NOTES[0].key : '';
+const saveUi = () => store.set(K.ui, ui);
+
+const newAttempt = () => ({ answers: {}, locked: {}, revealed: {}, submitted: false, startedAt: Date.now(), elapsed: 0, result: null });
+function getAttempt(setKey) { let a = store.get(K.att(setKey), null); if (!a || typeof a !== 'object') { a = newAttempt(); store.set(K.att(setKey), a); } return a; }
+const saveAttempt = (setKey, a) => store.set(K.att(setKey), a);
+
+function gradeQ(q, a, qi) {
+  const vals = a.answers[qi] || []; const locked = !!a.locked[qi];
+  const parts = q.parts.map((p, pi) => locked && isMatch(q, p, vals[pi]));
+  return { answered: locked, correct: locked && parts.every(Boolean), parts };
+}
+function summarize(set, a) {
+  const per = set.questions.map((q, i) => gradeQ(q, a, i));
+  const locked = per.filter(r => r.answered).length, correct = per.filter(r => r.correct).length;
+  return { per, locked, correct, score: correct * POINTS, total: set.questions.length };
+}
+function cellState(set, a, i) {
+  if (a.submitted) { const g = gradeQ(set.questions[i], a, i); return g.correct ? 'correct' : 'wrong'; }
+  if (a.locked[i]) return 'locked';
+  if (a.revealed[i]) return 'shown';
+  return '';
+}
+
+// ---------- 타이머 ----------
+let sessionStart = null, tickTimer = null;
+function startTimer() { if (sessionStart) return; sessionStart = Date.now(); clearInterval(tickTimer); tickTimer = setInterval(renderTimer, 1000); }
+function flushTimer() {
+  if (!sessionStart) return;
+  const a = getAttempt(ui.setKey);
+  if (!a.submitted) { a.elapsed = (a.elapsed || 0) + Math.floor((Date.now() - sessionStart) / 1000); saveAttempt(ui.setKey, a); }
+  sessionStart = null; clearInterval(tickTimer); tickTimer = null;
+}
+function elapsedOf(a) { return (a.elapsed || 0) + (sessionStart && !a.submitted ? Math.floor((Date.now() - sessionStart) / 1000) : 0); }
+function renderTimer() { const el = document.getElementById('timer'); if (!el) return; const a = getAttempt(ui.setKey); const s = elapsedOf(a); el.textContent = fmtSec(s); el.style.color = s >= TIME_LIMIT_MIN * 60 ? 'var(--pen)' : ''; }
+document.addEventListener('visibilitychange', () => { if (document.hidden) flushTimer(); else if (ui.view === 'exam') startTimer(); });
+window.addEventListener('pagehide', flushTimer);
+
+// ---------- 라우팅 ----------
+const $ = s => document.querySelector(s);
+const viewEl = $('#view'), topEl = $('#top'), tabEl = $('#tabbar'), sheetEl = $('#sheet');
+function go(view, patch) {
+  if (ui.view === 'exam' && view !== 'exam') flushTimer();
+  ui.view = view; Object.assign(ui, patch || {}); saveUi();
+  const h = '#' + view; if (location.hash !== h) { try { history.pushState(null, '', h); } catch (e) {} }
+  render(); window.scrollTo(0, 0);
+}
+window.addEventListener('popstate', () => { const v = (location.hash || '#home').slice(1); if (['home', 'exam', 'key', 'notes', 'result'].includes(v) && v !== ui.view) { if (ui.view === 'exam') flushTimer(); ui.view = v; saveUi(); render(); } });
+
+function render() {
+  closeSheet();
+  const v = ui.view;
+  tabEl.hidden = v === 'exam';
+  tabEl.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === (v === 'result' || v === 'exam' ? 'home' : v))));
+  if (v === 'exam') renderExam(); else if (v === 'result') renderResult(); else if (v === 'key') renderKey(); else if (v === 'notes') renderNotes(); else renderHome();
+}
+
+// ---------- 홈 ----------
+function renderHome() {
+  topEl.innerHTML = '<div class="top-in"><div class="top-title">정보처리기사 실기</div><span class="top-sub">필답형 · 20문항 · 60점 합격</span></div>';
+  const hist = store.get(K.hist, []);
+  const cards = SETS.map(set => {
+    const a = getAttempt(set.key); const s = summarize(set, a);
+    const last = hist.find(h => h.set === set.key);
+    let status, bar = '';
+    if (a.submitted) status = '<span class="pill ' + (s.score >= PASS ? 'pass' : 'fail') + '">' + s.score + '점 · ' + (s.score >= PASS ? '합격' : '불합격') + '</span><span>' + fmtDate(a.submittedAt) + '</span>';
+    else if (s.locked || Object.keys(a.revealed).length) { status = '<span class="pill live">진행 중</span><span>답 입력 ' + s.locked + ' / ' + s.total + '</span><span>' + fmtSec(elapsedOf(a)) + ' 경과</span>'; bar = '<div class="progress"><i style="width:' + Math.round(100 * s.locked / s.total) + '%"></i></div>'; }
+    else status = '<span class="pill">미응시</span>' + (last ? '<span>최근 ' + last.score + '점 · ' + fmtDate(last.date) + '</span>' : '');
+    const btns = a.submitted
+      ? '<button class="btn primary" data-act="result" data-set="' + set.key + '">결과 보기</button><button class="btn" data-act="restart" data-set="' + set.key + '">다시 풀기</button>'
+      : '<button class="btn primary" data-act="start" data-set="' + set.key + '">' + (s.locked || Object.keys(a.revealed).length ? '이어서 풀기' : '시작') + '</button>' + (s.locked || Object.keys(a.revealed).length ? '<button class="btn" data-act="restart" data-set="' + set.key + '">처음부터</button>' : '');
+    return '<article class="set-card"><div class="name">' + esc(set.name) + '</div><div class="stat">' + status + '</div>' + bar + '<div class="btn-row">' + btns + '</div></article>';
+  }).join('');
+  const histHtml = hist.length
+    ? '<div class="hist">' + hist.slice(0, 15).map(h => '<div class="hist-row"><div>' + esc(h.name) + '<div class="d">' + fmtDate(h.date) + (h.elapsed ? ' · ' + fmtSec(h.elapsed) : '') + '</div></div><b>' + h.score + '점</b><span class="pill ' + (h.score >= PASS ? 'pass' : 'fail') + '">' + (h.score >= PASS ? '합격' : '불합격') + '</span></div>').join('') + '</div>'
+    : '<div class="empty">제출한 시험이 아직 없습니다</div>';
+  viewEl.className = 'view';
+  viewEl.innerHTML = '<div class="eyebrow">국가기술자격 실기시험 · 필답형 모의고사</div><h1 class="h-display" style="margin-top:4px">정보처리기사 실기</h1><p class="muted" style="margin:6px 0 0">20문항 × 5점, 100점 만점. 60점 이상 합격. 실제 시험시간은 150분.</p>'
+    + '<div class="section" style="margin-top:18px">' + cards + '</div>'
+    + '<div class="section"><div class="section-h"><h2>응시 기록</h2>' + (hist.length ? '<button class="link-btn" data-act="clear-hist">기록 지우기</button>' : '') + '</div>' + histHtml + '</div>'
+    + '<p class="foot">출제 기준(NCS 기반, 2020년 개정)과 기출 유형을 참고해 새로 작성한 문항입니다. 실제 기출문제를 그대로 옮기지 않았습니다. 답안·점수·기록은 이 기기의 브라우저에만 저장됩니다.</p>';
+}
+
+// ---------- 시험 ----------
+function renderExam() {
+  const set = setOf(ui.setKey), a = getAttempt(ui.setKey);
+  if (a.submitted) { ui.view = 'result'; saveUi(); return renderResult(); }
+  startTimer();
+  const n = set.questions.length; ui.qi = Math.min(Math.max(0, ui.qi | 0), n - 1);
+  const qi = ui.qi, q = set.questions[qi];
+  const s = summarize(set, a);
+  topEl.innerHTML = '<div class="top-in"><button class="icon-btn" data-act="home" aria-label="홈으로">' + ICON_BACK + '</button><div class="top-title">' + esc(set.name) + '</div><span class="top-sub" id="timer">' + fmtSec(elapsedOf(a)) + '</span><button class="icon-btn primary" data-act="submit-ask">제출</button></div>';
+
+  const locked = !!a.locked[qi], revealed = !!a.revealed[qi];
+  const g = gradeQ(q, a, qi);
+  const vals = a.answers[qi] || [];
+  const ro = locked || revealed;
+  const parts = q.parts.map((p, pi) => {
+    const id = 'q' + qi + 'p' + pi; const val = esc(vals[pi] || '');
+    const label = q.parts.length === 1 && p.label === '정답' ? '답' : p.label;
+    const field = q.type === 'code'
+      ? '<textarea id="' + id + '" data-p="' + pi + '" placeholder="출력 결과를 그대로 입력 (여러 줄이면 줄바꿈)" spellcheck="false" autocomplete="off" autocapitalize="off"' + (ro ? ' readonly' : '') + '>' + val + '</textarea>'
+      : '<input id="' + id + '" data-p="' + pi + '" type="text" placeholder="답안 기재" value="' + val + '" autocomplete="off" spellcheck="false" autocapitalize="off" enterkeyhint="done"' + (ro ? ' readonly' : '') + '>';
+    return '<div class="part"><label class="part-label" for="' + id + '">' + esc(label) + '</label>' + field + '</div>';
+  }).join('');
+
+  let actions, status = '', state = '';
+  if (!locked && !revealed) {
+    const has = vals.some(v => v && v.trim());
+    actions = '<button class="btn primary block" data-act="lock"' + (has ? '' : ' disabled') + '>답 입력</button><div class="row2"><button class="btn" data-act="lock-reveal"' + (has ? '' : ' disabled') + '>답 입력 + 정답보기</button><button class="btn quiet" data-act="reveal">정답보기</button></div>';
+  } else if (locked && !revealed) {
+    status = '<span class="pill live">답 입력 완료</span>';
+    actions = '<div class="row2"><button class="btn" data-act="unlock">답 수정</button><button class="btn" data-act="reveal">정답보기</button></div>';
+  } else {
+    state = locked ? (g.correct ? 'correct' : 'wrong') : 'shown';
+    status = locked
+      ? '<span class="mark ' + (g.correct ? 'correct' : 'wrong') + '"><span class="glyph"></span>' + (g.correct ? '정답 · ' + POINTS + '점' : '오답 · 0점') + '</span>'
+      : '<span class="mark none">미응답 · 정답 확인</span>';
+    actions = '';
+  }
+  const key = revealed ? keyHtml(q, locked ? g.parts : null) : '';
+
+  viewEl.className = 'view exam';
+  viewEl.innerHTML = '<article class="q" data-state="' + state + '"><div class="q-head"><span class="q-num">' + (qi + 1) + '.</span><span class="chip">' + esc(q.bucketLabel) + '</span><span class="q-points">배점 ' + POINTS + '점</span></div>'
+    + '<div class="q-text">' + renderText(q.question) + '</div>' + renderCode(q)
+    + '<div class="answers">' + parts + '</div>'
+    + '<div class="status-line" style="margin-top:12px">' + status + '</div>'
+    + (actions ? '<div class="q-actions">' + actions + '</div>' : '') + key + '</article>'
+    + '<div class="exam-bar"><div class="exam-bar-in"><button class="btn" data-act="prev"' + (qi === 0 ? ' disabled' : '') + '>‹ 이전</button><button class="btn grid-btn" data-act="grid">' + (qi + 1) + ' / ' + n + ' · 입력 ' + s.locked + '</button><button class="btn" data-act="next"' + (qi === n - 1 ? ' disabled' : '') + '>다음 ›</button></div></div>';
+}
+function keyHtml(q, verdictByPart, myVals) {
+  const rows = q.parts.map((p, pi) => {
+    const alts = p.answers.slice(1).filter(x => normShort(x) !== normShort(p.answers[0]));
+    const label = q.parts.length === 1 && p.label === '정답' ? '정답' : p.label + ' 정답';
+    const v = verdictByPart ? (verdictByPart[pi] ? ' <span class="mark correct" style="font-size:12px"><span class="glyph" style="width:16px;height:16px;border-width:2px"></span></span>' : ' <span class="mark wrong" style="font-size:12px"><span class="glyph" style="width:16px;height:16px"></span></span>') : '';
+    const mine = myVals && myVals[pi] && myVals[pi].trim() ? '<div class="key-alt">내 답: <span class="my-answer">' + esc(myVals[pi]) + '</span></div>' : '';
+    return '<div class="key-row"><span class="k">' + esc(label) + '</span><span><span class="key-answer">' + esc(p.answers[0]) + '</span>' + v + (alts.length ? '<div class="key-alt">인정 답안: ' + alts.map(esc).join(' · ') + '</div>' : '') + mine + '</span></div>';
+  }).join('');
+  const point = q.point ? '<div class="key-row"><span class="k">출제 포인트</span><span>' + esc(q.point) + '</span></div>' : '';
+  return '<div class="key">' + rows + '<div class="key-row"><span class="k">해설</span><div class="key-exp">' + inlineMd(q.explanation) + '</div></div>' + point + '</div>';
+}
+
+// 시트
+function openSheet(html) { sheetEl.innerHTML = '<div class="sheet-bg" data-act="close-sheet"><div class="sheet" role="dialog" aria-modal="true">' + html + '</div></div>'; sheetEl.hidden = false; }
+function closeSheet() { sheetEl.hidden = true; sheetEl.innerHTML = ''; }
+function openGrid() {
+  const set = setOf(ui.setKey), a = getAttempt(ui.setKey);
+  const cells = set.questions.map((q, i) => '<button class="cell" type="button" data-act="goto" data-i="' + i + '" data-state="' + cellState(set, a, i) + '"' + (i === ui.qi ? ' aria-current="true"' : '') + '>' + (i + 1) + '</button>').join('');
+  openSheet('<div class="sheet-h"><h3>문항 이동</h3><button class="icon-btn" data-act="close-sheet" aria-label="닫기">' + ICON_CLOSE + '</button></div><div class="cells">' + cells + '</div><div class="legend"><span><i class="l-locked"></i>답 입력</span><span><i class="l-shown"></i>정답 확인(미응답)</span><span><i></i>미입력</span></div>');
+}
+function openSubmitAsk() {
+  const set = setOf(ui.setKey), a = getAttempt(ui.setKey), s = summarize(set, a);
+  const missing = s.total - s.locked;
+  openSheet('<div class="sheet-h"><h3>제출할까요?</h3><button class="icon-btn" data-act="close-sheet" aria-label="닫기">' + ICON_CLOSE + '</button></div><p class="muted" style="margin:0">답 입력 ' + s.locked + '문항' + (missing ? ' · 미입력 ' + missing + '문항은 0점 처리' : '') + '. 제출 후에는 답을 바꿀 수 없습니다.</p><div class="btn-row"><button class="btn quiet" data-act="close-sheet">계속 풀기</button><button class="btn primary" data-act="submit">제출</button></div>');
+}
+function submit() {
+  flushTimer();
+  const set = setOf(ui.setKey), a = getAttempt(ui.setKey);
+  const s = summarize(set, a);
+  a.submitted = true; a.submittedAt = Date.now(); a.result = { correct: s.correct, score: s.score, total: s.total };
+  saveAttempt(ui.setKey, a);
+  const hist = store.get(K.hist, []);
+  hist.unshift({ set: set.key, name: set.name, date: a.submittedAt, score: s.score, correct: s.correct, total: s.total, elapsed: a.elapsed || 0 });
+  store.set(K.hist, hist.slice(0, 50));
+  go('result');
+}
+
+// ---------- 결과 ----------
+function renderResult() {
+  const set = setOf(ui.setKey), a = getAttempt(ui.setKey);
+  if (!a.submitted) { ui.view = 'exam'; saveUi(); return renderExam(); }
+  const s = summarize(set, a); const pass = s.score >= PASS;
+  topEl.innerHTML = '<div class="top-in"><button class="icon-btn" data-act="home" aria-label="홈으로">' + ICON_BACK + '</button><div class="top-title">' + esc(set.name) + ' 결과</div></div>';
+  const byTopic = {};
+  set.questions.forEach((q, i) => { const k = q.bucketLabel; byTopic[k] = byTopic[k] || { n: 0, c: 0 }; byTopic[k].n++; if (s.per[i].correct) byTopic[k].c++; });
+  const cells = set.questions.map((q, i) => '<button class="cell" type="button" data-act="key-goto" data-i="' + i + '" data-state="' + (s.per[i].correct ? 'correct' : 'wrong') + '" aria-label="' + (i + 1) + '번 해설">' + (i + 1) + '</button>').join('');
+  viewEl.className = 'view';
+  viewEl.innerHTML = '<div class="result-card"><div><div class="score">' + s.score + '<small>/ 100점</small></div><div style="margin-top:8px"><span class="verdict ' + (pass ? 'pass' : 'fail') + '">' + (pass ? '합격' : '불합격') + '</span></div></div>'
+    + '<div class="muted">' + s.total + '문항 중 ' + s.correct + '문항 정답 · 미응답 ' + (s.total - s.locked) + '문항 · 소요 ' + fmtSec(a.elapsed || 0) + ' · ' + fmtDate(a.submittedAt) + '</div>'
+    + '<div class="by-topic">' + Object.entries(byTopic).map(([k, v]) => '<div><span>' + esc(k) + '</span><b>' + v.c + ' / ' + v.n + '</b></div>').join('') + '</div></div>'
+    + '<div class="section"><div class="section-h"><h2>문항별 결과</h2><span class="muted" style="font-size:12.5px">번호를 누르면 해설</span></div><div class="result-cells">' + cells + '</div></div>'
+    + '<div class="section"><div class="btn-row"><button class="btn primary" data-act="key-wrong">오답 해설 보기</button><button class="btn" data-act="restart" data-set="' + set.key + '">다시 풀기</button></div></div>';
+}
+
+// ---------- 해설집 ----------
+function renderKey() {
+  const set = setOf(ui.keySet), a = getAttempt(set.key); const s = summarize(set, a);
+  topEl.innerHTML = '<div class="top-in"><div class="top-title">해설집</div><span class="top-sub">' + set.questions.length + '문항</span></div>';
+  const seg = '<div class="seg">' + SETS.map(x => '<button data-act="key-set" data-set="' + x.key + '" aria-selected="' + (x.key === set.key) + '">' + esc(x.name.replace(' 모의고사', '')) + '</button>').join('') + '</div>';
+  const hasResult = a.submitted;
+  const filter = '<div class="seg" style="margin-top:8px"><button data-act="key-filter" data-f="all" aria-selected="' + (ui.keyFilter === 'all') + '">전체</button><button data-act="key-filter" data-f="wrong" aria-selected="' + (ui.keyFilter === 'wrong') + '"' + (hasResult ? '' : ' disabled') + '>오답·미응답' + (hasResult ? ' ' + (s.total - s.correct) : '') + '</button></div>';
+  const items = set.questions.map((q, i) => ({ q, i })).filter(({ i }) => ui.keyFilter !== 'wrong' || !hasResult || !s.per[i].correct);
+  const list = items.length ? items.map(({ q, i }) => {
+    const g = hasResult ? s.per[i] : null;
+    const badge = g ? (g.correct ? '<span class="mark correct" style="font-size:12px"><span class="glyph" style="width:18px;height:18px;border-width:2px"></span></span>' : g.answered ? '<span class="mark wrong" style="font-size:12px"><span class="glyph" style="width:18px;height:18px"></span></span>' : '<span class="pill">미응답</span>') : '';
+    return '<details class="key-item" id="k' + i + '"' + (ui.keyOpen === i ? ' open' : '') + '><summary><span class="n">' + (i + 1) + '</span><span class="t"><small>' + esc(q.bucketLabel) + (q.point ? ' · ' + esc(q.point) : '') + '</small>' + esc(firstLine(q)) + '</span>' + badge + '</summary>'
+      + '<div class="body"><div class="q-text">' + renderText(q.question) + '</div>' + renderCode(q) + keyHtml(q, g && g.answered ? g.parts : null, hasResult ? (a.answers[i] || []) : null) + '</div></details>';
+  }).join('') : '<div class="empty">표시할 문항이 없습니다</div>';
+  viewEl.className = 'view';
+  viewEl.innerHTML = seg + filter + (hasResult ? '' : '<p class="muted" style="margin:10px 0 0;font-size:13px">제출한 시험이 있으면 오답만 모아 볼 수 있습니다.</p>') + '<div class="section" style="margin-top:14px">' + list + '</div>';
+  if (ui.keyOpen != null) { const el = document.getElementById('k' + ui.keyOpen); if (el) setTimeout(() => el.scrollIntoView({ block: 'start' }), 0); ui.keyOpen = null; saveUi(); }
+}
+
+// ---------- 개념정리 ----------
+function renderNotes() {
+  const area = NOTES.find(n => n.key === ui.notesArea) || NOTES[0];
+  topEl.innerHTML = '<div class="top-in"><div class="top-title">개념정리</div><span class="top-sub">' + NOTES.length + '개 영역</span></div>';
+  const chips = '<div class="chips">' + NOTES.map(n => '<button data-act="notes-area" data-k="' + n.key + '" aria-selected="' + (n.key === area.key) + '">' + esc(n.area) + '</button>').join('') + '</div>';
+  const cards = area.cards.map((c, ci) => {
+    let body = '';
+    if (c.kind === 'table') body = '<div class="tbl-wrap"><table class="data"><thead><tr>' + c.head.map(h => '<th>' + inlineMd(h) + '</th>').join('') + '</tr></thead><tbody>' + c.rows.map(r => '<tr>' + r.map(x => '<td>' + inlineMd(x) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
+    else if (c.kind === 'list') body = '<ul>' + c.items.map(x => '<li>' + inlineMd(x) + '</li>').join('') + '</ul>';
+    else body = '<p>' + inlineMd(c.text || '') + '</p>';
+    if (c.note) body += '<div class="note">' + inlineMd(c.note) + '</div>';
+    return '<details class="note-card" open><summary>' + esc(c.title) + '</summary><div class="body">' + body + '</div></details>';
+  }).join('');
+  viewEl.className = 'view';
+  viewEl.innerHTML = chips + '<h2 class="h-display" style="font-size:22px;margin-top:14px">' + esc(area.area) + '</h2>' + (area.intro ? '<p class="intro" style="margin:8px 0 0">' + inlineMd(area.intro) + '</p>' : '') + '<div class="section">' + cards + '</div>';
+}
+
+// ---------- 이벤트 ----------
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-act], [data-tab]'); if (!t) return;
+  if (t.dataset.tab) { go(t.dataset.tab); return; }
+  const act = t.dataset.act;
+  const set = setOf(ui.setKey); let a = getAttempt(ui.setKey);
+  switch (act) {
+    case 'home': go('home'); break;
+    case 'start': { const key = t.dataset.set; const att = getAttempt(key); let qi = 0; for (let i = 0; i < setOf(key).questions.length; i++) { if (!att.locked[i] && !att.revealed[i]) { qi = i; break; } } go('exam', { setKey: key, qi }); break; }
+    case 'restart': { const key = t.dataset.set; const nm = setOf(key).name; openSheet('<div class="sheet-h"><h3>' + esc(nm) + ' 다시 풀기</h3><button class="icon-btn" data-act="close-sheet" aria-label="닫기">' + ICON_CLOSE + '</button></div><p class="muted" style="margin:0">지금까지의 답안은 지워집니다. 제출한 점수는 응시 기록에 남습니다.</p><div class="btn-row"><button class="btn quiet" data-act="close-sheet">취소</button><button class="btn primary" data-act="restart-confirm" data-set="' + key + '">새로 시작</button></div>'); break; }
+    case 'restart-confirm': { const key = t.dataset.set; flushTimer(); saveAttempt(key, newAttempt()); go('exam', { setKey: key, qi: 0 }); break; }
+    case 'result': go('result', { setKey: t.dataset.set }); break;
+    case 'clear-hist': openSheet('<div class="sheet-h"><h3>응시 기록 지우기</h3><button class="icon-btn" data-act="close-sheet" aria-label="닫기">' + ICON_CLOSE + '</button></div><p class="muted" style="margin:0">제출한 점수 기록을 모두 지웁니다. 진행 중인 답안은 그대로 둡니다.</p><div class="btn-row"><button class="btn quiet" data-act="close-sheet">취소</button><button class="btn danger" data-act="clear-hist-confirm">지우기</button></div>'); break;
+    case 'clear-hist-confirm': store.del(K.hist); render(); break;
+    case 'prev': flushTimer(); ui.qi = Math.max(0, ui.qi - 1); saveUi(); renderExam(); window.scrollTo(0, 0); break;
+    case 'next': flushTimer(); ui.qi = Math.min(set.questions.length - 1, ui.qi + 1); saveUi(); renderExam(); window.scrollTo(0, 0); break;
+    case 'grid': openGrid(); break;
+    case 'goto': flushTimer(); ui.qi = +t.dataset.i; saveUi(); renderExam(); window.scrollTo(0, 0); break;
+    case 'close-sheet': if (e.target === t || t.classList.contains('icon-btn') || t.classList.contains('btn')) closeSheet(); break;
+    case 'lock': a.locked[ui.qi] = true; saveAttempt(ui.setKey, a); renderExam(); break;
+    case 'lock-reveal': a.locked[ui.qi] = true; a.revealed[ui.qi] = true; saveAttempt(ui.setKey, a); renderExam(); break;
+    case 'reveal': a.revealed[ui.qi] = true; saveAttempt(ui.setKey, a); renderExam(); break;
+    case 'unlock': delete a.locked[ui.qi]; saveAttempt(ui.setKey, a); renderExam(); { const f = viewEl.querySelector('input, textarea'); if (f) f.focus(); } break;
+    case 'submit-ask': openSubmitAsk(); break;
+    case 'submit': submit(); break;
+    case 'key-goto': go('key', { keySet: ui.setKey, keyFilter: 'all', keyOpen: +t.dataset.i }); break;
+    case 'key-wrong': go('key', { keySet: ui.setKey, keyFilter: 'wrong' }); break;
+    case 'key-set': ui.keySet = t.dataset.set; saveUi(); renderKey(); break;
+    case 'key-filter': ui.keyFilter = t.dataset.f; saveUi(); renderKey(); break;
+    case 'notes-area': ui.notesArea = t.dataset.k; saveUi(); renderNotes(); window.scrollTo(0, 0); break;
+  }
+});
+viewEl.addEventListener('input', e => {
+  const el = e.target; if (!el.matches('input, textarea') || ui.view !== 'exam') return;
+  const a = getAttempt(ui.setKey); const p = +el.dataset.p;
+  a.answers[ui.qi] = a.answers[ui.qi] || []; a.answers[ui.qi][p] = el.value; saveAttempt(ui.setKey, a);
+  const has = (a.answers[ui.qi] || []).some(v => v && v.trim());
+  viewEl.querySelectorAll('[data-act="lock"], [data-act="lock-reveal"]').forEach(b => { b.disabled = !has; });
+});
+viewEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.target.matches('input') && ui.view === 'exam') { e.preventDefault(); const fs = [...viewEl.querySelectorAll('.answers input, .answers textarea')]; const nx = fs[fs.indexOf(e.target) + 1]; if (nx) nx.focus(); else e.target.blur(); }
+});
+
+document.addEventListener('focusin', e => { if (e.target.matches && e.target.matches('input, textarea')) document.body.classList.add('typing'); });
+document.addEventListener('focusout', () => document.body.classList.remove('typing'));
+
+// 시작
+(function boot() {
+  const h = (location.hash || '').slice(1);
+  if (['home', 'exam', 'key', 'notes', 'result'].includes(h)) ui.view = h;
+  if (ui.view === 'exam' || ui.view === 'result') { const a = getAttempt(ui.setKey); ui.view = a.submitted ? 'result' : 'exam'; }
+  saveUi(); render();
+  try { if (PWA && 'serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {}); } catch (e) {}
+})();
+</script>

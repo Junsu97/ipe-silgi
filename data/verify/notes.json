@@ -1,0 +1,44 @@
+{
+  "issues": [
+    {
+      "areaKey": "design",
+      "cardTitle": "응집도(높을수록 좋음) · 결합도(낮을수록 좋음)",
+      "location": "외부 External | 외부 데이터 형식·프로토콜 공유",
+      "severity": "minor",
+      "issue": "일반(Myers) 정의를 옮긴 문장이라 교재 표현과 다르다. 수제비·시나공은 「어떤 모듈에서 외부로 선언한 데이터(변수)를 다른 모듈에서 참조하는 경우」로 기술하며 시험 지문도 이 표현을 쓴다.",
+      "fix": "다른 모듈에서 외부로 선언한 변수(반환값)를 참조"
+    },
+    {
+      "areaKey": "design",
+      "cardTitle": "GoF 디자인 패턴 23종",
+      "location": "중재자 Mediator | M:N → N:1",
+      "severity": "minor",
+      "issue": "관계 표기 방향이 통용 표현과 반대로 읽힌다. 중재자 1개가 동료 객체 N개와 연결되므로 「M:N → 1:N」으로 쓰는 것이 일반적이다.",
+      "fix": "객체 간 상호작용을 한 객체(중재자)에 캡슐화, M:N → 1:N"
+    },
+    {
+      "areaKey": "security",
+      "cardTitle": "암호 알고리즘",
+      "location": "ARIA | 2004 국정원·ETRI",
+      "severity": "minor",
+      "issue": "개발 주체 표기가 교재와 다르다. 교재는 「국가정보원과 산학연 협회」로 기술하며, ARIA 라는 이름 자체가 Academy·Research Institute·Agency 의 머리글자다. ETRI 단독 표기는 표준 서술이 아니다.",
+      "fix": "128비트 블록, 키 128/192/256, ISPN, 2004 국가정보원·산학연(Academy·Research Institute·Agency)"
+    },
+    {
+      "areaKey": "lang",
+      "cardTitle": "Java 객체지향 함정",
+      "location": "int → long → double → Object 순으로",
+      "severity": "minor",
+      "issue": "자동 형변환 순서에서 float 가 빠져 있다. int 인자에 (float) 와 (double) 오버로드가 있으면 float 가 선택되며, Object 는 박싱(Integer) 뒤에 온다.",
+      "fix": "int 인자는 int → long → float → double → (박싱) Integer → Object 순으로 가까운 것을 고른다."
+    },
+    {
+      "areaKey": "req",
+      "cardTitle": "자주 나온 용어",
+      "location": "팬인(호출하는 상위 모듈 수",
+      "severity": "minor",
+      "issue": "팬인·팬아웃 모두 「호출하는」으로 써서 주어가 모호하다. 팬인은 「자신을 호출하는 상위 모듈 수」, 팬아웃은 「자신이 호출하는 하위 모듈 수」다.",
+      "fix": "팬인(자신을 호출하는 상위 모듈 수, 많으면 재사용 좋음), 팬아웃(자신이 호출하는 하위 모듈 수, 적을수록 좋음)"
+    }
+  ]
+}

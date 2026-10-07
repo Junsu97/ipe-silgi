@@ -1,0 +1,7 @@
+dist/
+tools/uitest/profile/
+tools/uitest/shots/
+tools/icon/*.class
+node_modules/
+.DS_Store
+Thumbs.db

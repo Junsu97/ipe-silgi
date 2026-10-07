@@ -1,0 +1,65 @@
+{
+  "results": [
+    {
+      "index": 0,
+      "verdict": "pass",
+      "reason": "① HTTP/HTTPS/SMTP 위에서 XML 메시지를 교환하고 Envelope·Header·Body 구조를 갖는 프로토콜 = SOAP(XML-RPC 는 Envelope/Header/Body 구조가 없음). ② 서비스명·제공 위치·메시지 포맷·프로토콜을 XML 로 기술 = WSDL(WADL 은 REST 용이라 웹 서비스 3요소 맥락에서 경쟁 불가). ③ WSDL 을 등록·검색하는 레지스트리 = UDDI 뿐. Publish→Find→Bind 흐름, REST 와의 구분 등 해설 보조 설명도 사실과 일치. 지문에 SOAP/WSDL/UDDI 및 영문 전체 명칭 미노출, 세 답 서로 다름, 빈칸 ①②③ 과 parts 순서·개수 일치.",
+      "extraAnswers": [
+        {"label": "①", "answers": ["SOAP(Simple Object Access Protocol)", "단순 객체 접근 프로토콜"]},
+        {"label": "②", "answers": ["WSDL(Web Services Description Language)", "WSDL(Web Service Description Language)", "웹 서비스 기술 언어(WSDL)"]},
+        {"label": "③", "answers": ["UDDI(Universal Description, Discovery and Integration)", "UDDI(Universal Description Discovery and Integration)", "Universal Description, Discovery, and Integration"]}
+      ],
+      "note": "② 지문의 「…XML 형식으로 기술한 서비스 명세 언어」가 한글 인정 표기 「웹 서비스 기술 언어」와 어휘가 겹친다. 본답은 WSDL 이라 유일성에는 영향 없지만, 「기술한」을 「정의한/표현한」으로 바꾸면 더 깔끔하다."
+    },
+    {
+      "index": 1,
+      "verdict": "pass",
+      "reason": "Tripwire 는 1992년 퍼듀 대학(Gene Kim·Eugene Spafford)에서 개발된 파일 무결성 검사 도구로, 기준 DB 의 해시(체크섬)·속성과 현재 상태를 비교해 백도어 설치·설정 파일 변조를 탐지하며 오픈 소스판(Open Source Tripwire)과 상용판이 공존한다 — 지문 사실 모두 일치. 수제비 「인터페이스 보안 › 데이터 무결성 검사 도구(Tripwire·AIDE·Samhain·Claymore·Slipwire·Fcheck)」 정의와 동일 범주. 경쟁 용어 AIDE(1999년, 오픈 소스 전용)·Samhain(오픈 소스, 중앙 관리형)·Fcheck(Perl 스크립트)는 「1992년 퍼듀」「오픈 소스+상용 공존」 단서로 배제되어 답 유일. 지문에 Tripwire/트립와이어 미노출. 해설의 AIDE·Samhain·Snort·Nessus 비교도 사실.",
+      "extraAnswers": [
+        {"label": "정답", "answers": ["트립와이어(Tripwire)", "Tripwire(트립와이어)", "Open Source Tripwire"]}
+      ],
+      "note": ""
+    },
+    {
+      "index": 2,
+      "verdict": "pass",
+      "reason": "도착 시간 표로 처음부터 재계산(Node 교차 확인 verify/misc/sjf.js). t=0 준비 큐 {P1} → P1[0-8]; t=8 준비 큐 {P2:4, P3:10, P4:6} → P2[8-12]; t=12 {P3:10, P4:6} → P4[12-18]; t=18 → P3[18-28]. 선택 시점마다 실행 시간 동률 없음, CPU 유휴 없음(실행 합 28 = 종료 시각 28). 대기 = 시작−도착: 0, 7, 16, 9 → 32/4 = 8ms. 반환 = 종료−도착: 8, 11, 26, 15 → 60/4 = 15ms (= 대기 합 32 + 실행 합 28). 출제자 답 8·15 와 일치. 지문에 비선점·문맥 교환 무시가 명시되어 선점형(SRTF) 해석 여지 없음. 해설의 「도착 시간 무시 순서 P2→P4→P1→P3」 주의 문구도 적절.",
+      "extraAnswers": [
+        {"label": "① 평균 대기 시간", "answers": ["8 ms", "8밀리초", "8(ms)"]},
+        {"label": "② 평균 반환 시간", "answers": ["15 ms", "15밀리초", "15(ms)"]}
+      ],
+      "note": ""
+    },
+    {
+      "index": 3,
+      "verdict": "pass",
+      "reason": "「프로세스가 일정 시간 동안 자주 참조하는 페이지들의 집합」「데닝(Denning) 제안」「주기억장치 상주로 스래싱 방지」「시간에 따라 구성 변화」는 수제비·시나공의 워킹 셋 정의 그대로이며 사실과 일치. 경쟁 용어: 지역성(Locality)은 참조 경향 이론이지 페이지 집합이 아니고, 상주 집합(Resident Set)은 실제 적재된 페이지 집합이라 「자주 참조하는」 정의와 다르며, PFF 는 부재율 상·하한으로 프레임 수를 조절하는 기법명이라 「집합」이 아님 → 답 유일. 지문에 워킹/Working/작업 집합 미노출(「집합」 단독 어휘는 정의 서술에 불가피). 해설의 지역성·스래싱·PFF 구분 설명도 정확.",
+      "extraAnswers": [
+        {"label": "정답", "answers": ["워킹 세트", "워킹세트", "작업 세트", "작업집합", "워킹 셋(Working Set)", "워킹셋(Working Set)", "Working-Set"]}
+      ],
+      "note": ""
+    },
+    {
+      "index": 4,
+      "verdict": "pass",
+      "reason": "기호↔이름 대응 σ=Select(수평적 부분집합, 조건 만족 튜플), π=Project(수직적 부분집합, 지정 속성), ÷=Division(S 의 모든 튜플과 관련된 R 의 튜플에서 S 속성 제외) 모두 표준 정의와 일치. 순수 관계 연산자 4종(Select·Project·Join·Division)과 일반 집합 연산자(∪∩−×) 분류, WHERE↔Select·SELECT 열 목록↔Project 대응 등 해설도 정확. 지문에 선택/추출/나누기/Select/Project/Division 미노출(② 를 「지정한 속성」으로 서술해 「추출」 노출 회피). Join(⋈)·집합 연산자는 지문 기호와 달라 경쟁 불가 → 각 빈칸 유일. 2020년 실기 기출 유형과 같은 형식.",
+      "extraAnswers": [
+        {"label": "①", "answers": ["Selection", "셀렉션", "선택 연산", "Select 연산", "선택(Select)", "셀렉트 연산"]},
+        {"label": "②", "answers": ["Projection", "프로젝션", "투영", "추출 연산", "Project 연산", "추출(Project)", "프로젝트 연산"]},
+        {"label": "③", "answers": ["Division 연산", "디비전 연산", "나누기 연산", "나눗셈", "나눗셈 연산", "나누기(Division)"]}
+      ],
+      "note": "① 「선택」 ② 「추출」은 「투영」과 함께 교재별 한글 표기가 갈리므로 Selection/Projection·투영을 보충했다."
+    },
+    {
+      "index": 5,
+      "verdict": "pass",
+      "reason": "① 「고의로 결함을 주어 실패하도록 한 뒤 올바르게 복구되는지 확인」= 회복(Recovery) 테스트, 회귀 테스트(변경 후 신규 결함 확인)와 구분됨. ② 「과도한 정보량이나 빈도 등을 부과하여 과부하 시에도 정상 실행 확인」은 수제비·시나공 강도(Stress) 테스트 정의와 동일하며, 성능 테스트(응답 시간·처리량 측정)·부하 테스트(임계점 탐색)와 구분되는 단서(「과부하 상태에서도 정상 실행」) 포함, 스트레스도 인정 표기에 있음. ③ 「변경된 시스템과 기존 시스템에 동일 데이터 입력 후 결과 비교」= 병행(Parallel) 테스트. 비교(Comparison) 테스트는 「같은 명세의 여러 버전/구현」에 같은 자료를 넣어 비교하는 것이라 「변경된 시스템 vs 기존 시스템」 단서로 구분됨 → 각 빈칸 유일. 지문에 회복/복구/강도/스트레스/병행 및 영문 미노출. 해설의 성능·회귀·보안·구조 테스트 보조 설명도 교재 정의와 일치.",
+      "extraAnswers": [
+        {"label": "①", "answers": ["복구 테스트", "Recovery Testing", "회복(Recovery)", "회복(Recovery) 테스트", "회복 테스트(Recovery Test)", "복구(Recovery)"]},
+        {"label": "②", "answers": ["스트레스 테스트", "Stress Testing", "강도(Stress)", "강도(Stress) 테스트", "강도 테스트(Stress Test)", "스트레스(Stress)"]},
+        {"label": "③", "answers": ["Parallel Testing", "병행(Parallel)", "병행(Parallel) 테스트", "병행 테스트(Parallel Test)"]}
+      ],
+      "note": "③ 「비교 테스트」는 정의가 다르므로(동일 명세의 복수 버전 비교) 인정 표기에 넣지 않았다."
+    }
+  ]
+}

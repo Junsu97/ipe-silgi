@@ -1,0 +1,68 @@
+{
+  "questions": [
+    {
+      "subtopic": "람다 함수와 map·filter·sorted(key, reverse)·max(key)",
+      "type": "code",
+      "language": "Python",
+      "question": "다음 Python 코드의 출력 결과를 쓰시오.",
+      "code": "def apply(func, data):\n    return [func(x) for x in data]\n\nnums = [5, 12, 7, 3, 20, 8]\nsq = list(map(lambda x: x * 2 - 1, nums))\nev = list(filter(lambda x: x % 3 == 0, sq))\nwords = [\"kiwi\", \"apple\", \"fig\", \"banana\", \"cherry\"]\nw1 = sorted(words, key=len)\nw2 = sorted(words, key=lambda s: s[-1], reverse=True)\ntotal = sum(apply(lambda x: x // 4, nums))\nmx = max(nums, key=lambda x: x % 7)\nprint(ev)\nprint(w1[0], w1[-1])\nprint(w2[0], w2[2])\nprint(total, mx)",
+      "parts": [
+        {
+          "label": "출력 결과",
+          "answers": ["[9, 39, 15]\nfig cherry\ncherry fig\n12 20"]
+        }
+      ],
+      "explanation": "map은 각 원소에 람다를 적용하므로 sq = [9, 23, 13, 5, 39, 15]가 되고, filter는 3의 배수만 남겨 ev = [9, 39, 15]가 된다. sorted(key=len)은 문자열 길이 기준 오름차순이며 길이가 같은 banana와 cherry는 원래 순서를 유지(안정 정렬)하므로 w1 = ['fig', 'kiwi', 'apple', 'banana', 'cherry'], 따라서 첫 원소는 fig, 마지막은 cherry이다. w2는 마지막 글자(i, e, g, a, y)를 기준으로 내림차순이므로 ['cherry', 'kiwi', 'fig', 'apple', 'banana']가 되어 w2[0]은 cherry, w2[2]는 fig이다. total은 각 원소를 4로 나눈 몫 1+3+1+0+5+2 = 12이고, max(key=lambda x: x % 7)은 7로 나눈 나머지(5, 5, 0, 3, 6, 1)가 가장 큰 원소인 20을 반환한다. sorted·max의 key는 비교 기준만 바꿀 뿐 반환되는 값은 원래 원소라는 점에 주의한다.",
+      "difficulty": "중",
+      "selfCheck": "손 추적: nums=[5,12,7,3,20,8] → sq=x*2-1=[9,23,13,5,39,15] → ev(3의 배수)=[9,39,15]. 길이: kiwi4 apple5 fig3 banana6 cherry6 → w1=[fig,kiwi,apple,banana,cherry] → w1[0]=fig, w1[-1]=cherry. 끝글자: kiwi→i, apple→e, fig→g, banana→a, cherry→y → 오름차순 banana,apple,fig,kiwi,cherry → reverse → cherry,kiwi,fig,apple,banana → w2[0]=cherry, w2[2]=fig. x//4: 1,3,1,0,5,2 합 12. x%7: 5,5,0,3,6,1 → 최대 6 → 20. JavaScript 이식(gen/python/q1.js, 안정 정렬·Math.floor·첫 최댓값 유지 반영) Node 실행 결과: '[9, 39, 15]' / 'fig cherry' / 'cherry fig' / '12 20' — 손 추적과 일치."
+    },
+    {
+      "subtopic": "리스트 별칭과 복사(a = b vs a = b[:]), 리스트 메서드 반환값, += 와 + 의 차이",
+      "type": "code",
+      "language": "Python",
+      "question": "다음 Python 코드의 출력 결과를 쓰시오.",
+      "code": "a = [3, 1, 4, 1, 5]\nb = a\nc = a[:]\nb.append(9)\nc.insert(0, 7)\nr1 = a.pop()\nr2 = c.pop(1)\na.remove(1)\nc.extend([2, 6])\nidx = a.index(4)\nd = a\nd += [8]\ne = c\ne = e + [0]\nprint(a)\nprint(c)\nprint(r1, r2, idx)\nprint(a is d, c is e, len(e))",
+      "parts": [
+        {
+          "label": "출력 결과",
+          "answers": ["[3, 4, 1, 5, 8]\n[7, 1, 4, 1, 5, 2, 6]\n9 3 1\nTrue False 8"]
+        }
+      ],
+      "explanation": "b = a는 같은 리스트 객체를 가리키는 별칭이고 c = a[:]는 새 리스트를 만드는 복사이므로, b.append(9)는 a에 반영되지만 c.insert(0, 7)은 c에만 반영된다. pop()은 마지막 원소 9를 꺼내 반환하고 pop(1)은 c의 인덱스 1에 있던 3을 반환하며, remove(1)은 처음 만나는 1 하나만 지우므로 a = [3, 4, 1, 5], index(4)는 1이다. d = a 뒤의 d += [8]은 리스트의 제자리(in-place) 확장이라 a도 [3, 4, 1, 5, 8]이 되고 d is a는 True이다. 반면 e = e + [0]은 새 리스트를 만들어 e에 다시 바인딩하므로 c는 그대로 7개 원소를 유지하고 c is e는 False, len(e)는 8이다.",
+      "difficulty": "상",
+      "selfCheck": "손 추적표: 초기 a=[3,1,4,1,5], b→a(별칭), c=[3,1,4,1,5](복사). b.append(9) → a=[3,1,4,1,5,9]. c.insert(0,7) → c=[7,3,1,4,1,5]. r1=a.pop()=9 → a=[3,1,4,1,5]. r2=c.pop(1)=3 → c=[7,1,4,1,5]. a.remove(1) → a=[3,4,1,5]. c.extend([2,6]) → c=[7,1,4,1,5,2,6]. idx=a.index(4)=1. d=a; d+=[8] → 제자리 확장 a=d=[3,4,1,5,8]. e=c; e=e+[0] → 새 객체 e=[7,1,4,1,5,2,6,0], c 불변. a is d=True, c is e=False, len(e)=8. JavaScript 이식(gen/python/q2.js, push/splice/concat 으로 의미 보존, === 로 동일 객체 판정) Node 실행 결과: '[3, 4, 1, 5, 8]' / '[7, 1, 4, 1, 5, 2, 6]' / '9 3 1' / 'True False 8' — 손 추적과 일치."
+    },
+    {
+      "subtopic": "집합 연산(합·교·차·대칭차)과 enumerate·zip 튜플 언패킹, 조건부 리스트·딕셔너리 컴프리헨션",
+      "type": "code",
+      "language": "Python",
+      "question": "다음 Python 코드의 출력 결과를 쓰시오.",
+      "code": "a = [4, 8, 15, 16, 23, 42]\nb = [8, 16, 24, 42, 50]\nsa, sb = set(a), set(b)\ninter = sorted(sa & sb)\nunion = sorted(sa | sb)\ndiff = sorted(sa - sb)\nsym = sorted(sa ^ sb)\nprint(inter, len(union))\nprint(diff[-1], sym[0])\npairs = [(i, x) for i, x in enumerate(a) if x % 2 == 0]\ntotal = 0\nfor i, x in pairs:\n    total += i * x\nprint(len(pairs), total)\nnames = [\"ann\", \"bob\", \"cy\"]\nscores = [70, 85, 90]\nd = {n: s for n, s in zip(names, scores) if s >= 80}\nprint(d)",
+      "parts": [
+        {
+          "label": "출력 결과",
+          "answers": ["[8, 16, 42] 8\n23 4\n4 266\n{'bob': 85, 'cy': 90}"]
+        }
+      ],
+      "explanation": "sa & sb는 교집합 {8, 16, 42}, sa | sb는 합집합으로 원소가 4, 8, 15, 16, 23, 24, 42, 50의 8개이다. sa - sb는 a에만 있는 {4, 15, 23}이므로 정렬 후 마지막은 23이고, sa ^ sb는 대칭차 {4, 15, 23, 24, 50}이므로 정렬 후 첫 원소는 4이다. enumerate(a)는 (인덱스, 값) 튜플을 만들며 짝수만 남기면 (0, 4), (1, 8), (3, 16), (5, 42)의 4개이고, 인덱스×값의 합은 0 + 8 + 48 + 210 = 266이다. zip으로 이름과 점수를 묶어 80점 이상만 담은 딕셔너리 컴프리헨션은 삽입 순서를 유지하므로 {'bob': 85, 'cy': 90}이 출력된다. set을 직접 print하면 순서가 보장되지 않으므로 sorted로 리스트화한 뒤 출력하는 점에 유의한다.",
+      "difficulty": "중",
+      "selfCheck": "손 추적: sa={4,8,15,16,23,42}, sb={8,16,24,42,50}. 교집합 [8,16,42]; 합집합 {4,8,15,16,23,24,42,50} 크기 8; 차집합 sa-sb=[4,15,23] → diff[-1]=23; 대칭차 [4,15,23,24,50] → sym[0]=4. enumerate(a): (0,4)(1,8)(2,15)(3,16)(4,23)(5,42) → 짝수 x만 (0,4)(1,8)(3,16)(5,42) → 4개, total=0*4+1*8+3*16+5*42=0+8+48+210=266. zip(names,scores): (ann,70)(bob,85)(cy,90) → 80 이상 bob,cy → {'bob': 85, 'cy': 90}. JavaScript 이식(gen/python/q3.js, Set+filter+숫자 정렬, dict 는 삽입 순서 객체로 출력 형식까지 재현) Node 실행 결과: '[8, 16, 42] 8' / '23 4' / '4 266' / \"{'bob': 85, 'cy': 90}\" — 손 추적과 일치."
+    },
+    {
+      "subtopic": "global 키워드와 함수 안 지역변수 섀도잉, while-else 와 break, divmod 와 거듭제곱",
+      "type": "code",
+      "language": "Python",
+      "question": "다음 Python 코드의 출력 결과를 쓰시오.",
+      "code": "count = 0\ntotal = 10\n\ndef step(n):\n    global count\n    count += 1\n    total = n * 2\n    return total + count\n\ndef search(limit):\n    i = 1\n    while i <= limit:\n        if step(i) % 7 == 0:\n            break\n        i += 1\n    else:\n        return -1\n    return i\n\nr1 = search(3)\nr2 = search(10)\nq, m = divmod(2 ** count + total, 7)\nprint(r1, r2)\nprint(count, total)\nprint(q, m)",
+      "parts": [
+        {
+          "label": "출력 결과",
+          "answers": ["-1 6\n9 10\n74 4"]
+        }
+      ],
+      "explanation": "step 안의 count는 global 선언 덕분에 전역 변수를 직접 증가시키지만, total은 global 선언이 없으므로 함수 안에서만 쓰이는 지역 변수가 되어 전역 total = 10은 끝까지 바뀌지 않는다. search(3)은 step(1), step(2), step(3)이 각각 3, 6, 9를 반환하여 7의 배수가 없고, break 없이 while 조건이 거짓이 되어 끝났으므로 else 절이 실행되어 -1을 반환한다. search(10)은 count가 3부터 이어지며 step(1)~step(6)이 6, 9, 12, 15, 18, 21을 반환하고, 21이 7의 배수이므로 i = 6에서 break되어 else 절을 건너뛰고 6을 반환한다. step은 총 9번 호출되어 count = 9, total = 10이며, 2 ** 9 + 10 = 522를 7로 나눈 divmod는 몫 74, 나머지 4이다. while의 else는 반복이 break 없이 정상 종료될 때만 실행된다는 점이 핵심이다.",
+      "difficulty": "중",
+      "selfCheck": "손 추적표: 전역 count=0, total=10. search(3): i=1 step(1) count=1 지역total=2 반환3 (3%7≠0) → i=2 step(2) count=2 반환4+2=6 → i=3 step(3) count=3 반환6+3=9 → i=4>3 정상 종료 → else → r1=-1. search(10): i=1 step(1) count=4 반환2+4=6 → i=2 step(2) count=5 반환4+5=9 → i=3 step(3) count=6 반환6+6=12 → i=4 step(4) count=7 반환8+7=15 → i=5 step(5) count=8 반환10+8=18 → i=6 step(6) count=9 반환12+9=21, 21%7==0 → break → return 6 → r2=6. 최종 count=9, 전역 total=10(지역 total 은 영향 없음). 2**9+10=512+10=522, 522=7*74+4 → q=74, m=4. JavaScript 이식(gen/python/q4.js, 지역 total 을 별도 변수로, while-else 는 broke 플래그로, divmod 는 양수라 Math.floor/% 로 재현) Node 실행 결과: '-1 6' / '9 10' / '74 4' — 손 추적과 일치."
+    }
+  ]
+}

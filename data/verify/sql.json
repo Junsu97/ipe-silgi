@@ -1,0 +1,43 @@
+{
+  "results": [
+    {
+      "index": 0,
+      "verdict": "pass",
+      "reason": "수작업 재추적: 학생 7행을 학과(D01·D02·D03, 학과코드 유일)와 대조 — 1001 D01 ○ / 1002 D02 ○ / 1003 NULL × / 1004 D01 ○ / 1005 D04(학과에 없음) × / 1006 D02 ○ / 1007 NULL ×. ① INNER JOIN = 4행. ② LEFT OUTER JOIN = 학생 쪽 각 행이 최대 1건과만 짝지어지므로 7행(짝 없는 3행은 학과 열 NULL). ③ LEFT OUTER 후 D.학과코드 IS NULL = 1003·1005·1007 의 3행. NULL = D.학과코드 비교는 UNKNOWN 이라 조인 불만족으로 처리됨이 맞고, D03(소속 학생 없음)이 결과에 나오지 않는다는 해설도 맞다. Node 배열 계산(verify/sql/check.js) inner=4·left=7·anti=3 으로 일치. 지문·형식(실기 문체, ①②③ 과 parts 일치) 이상 없음.",
+      "extraAnswers": [
+        { "label": "①", "answers": ["4행", "4개"] },
+        { "label": "②", "answers": ["7행", "7개"] },
+        { "label": "③", "answers": ["3행", "3개"] }
+      ],
+      "note": "③ 정답 3 이 index 1 의 ③ 정답과 숫자만 우연히 같다(개념은 다름). 신경 쓰이면 학생 1행을 더 두어 값을 갈라도 된다."
+    },
+    {
+      "index": 1,
+      "verdict": "pass",
+      "reason": "수작업 재추적: 참여.사번 집합 = {E01, E03, E05, E06}, NULL 없음 → NOT IN 이 전체 UNKNOWN 으로 무너지는 함정 없음. ① 사원 중 미포함 = E02(이수)·E04(최아) → 2. ② 상관 서브쿼리: 사번별 P3 참여 행은 (E05, P3) 하나뿐 → 이름 정현 1행(단일 행이라 정렬 무관). ③ P1 참여자 = E01·E03·E06 → NOT EXISTS 는 나머지 E02·E04·E05 → 3. Node 배열 계산(verify/sql/check.js) notIn=2·existsP3=[정현]·notExistsP1=3 으로 일치. 해설의 NOT IN(값 집합 비교) vs EXISTS(행 존재 판단) 구분 설명도 맞다.",
+      "extraAnswers": [
+        { "label": "①", "answers": ["2명", "2행", "2개"] },
+        { "label": "③", "answers": ["3명", "3행", "3개"] }
+      ],
+      "note": "②는 「출력되는 결과」를 묻고 SELECT 이름 이라 정현 외 다른 표기가 없다. 보기 좋게 하려면 ①·③처럼 ②도 COUNT 로 통일하거나, 반대로 ②가 이름을 묻는다는 점을 지문에서 한 번 더 짚어 줘도 된다(선택)."
+    },
+    {
+      "index": 2,
+      "verdict": "pass",
+      "reason": "① 「부서명 VARCHAR(20) NOT NULL ( ① )」 자리에서 「서로 다른 부서가 같은 부서명을 가질 수 없다」를 뜻하는 열 제약은 UNIQUE 뿐 — PRIMARY KEY 는 부서코드에 이미 선언되어 테이블당 1개 규칙에 걸리고, CHECK·DEFAULT·NOT NULL 은 의미가 다르다. ② 「급여 INT ( ② ) 2000」 처럼 리터럴 앞에 올 수 있는 키워드는 DEFAULT 뿐. ③ ON DELETE 옵션(CASCADE·NO ACTION·RESTRICT·SET DEFAULT·SET NULL) 중 「행은 남기고 부서코드 값은 NULL 로」를 직접 뜻하는 것은 SET NULL. 지문에 UNIQUE·DEFAULT·SET NULL 이 노출되지 않음(check.js 로 확인, 조건문의 「NULL 로 바뀐다」는 키워드 조합이 아니라 동작 설명이라 허용 범위). 해설의 CASCADE / NO ACTION(RESTRICT) / PRIMARY KEY 테이블당 1개 / CHECK 설명 모두 표준 교재와 일치. 채점기가 대소문자·공백을 제거하므로 unique·setnull 등 표기 차이는 추가 없이도 인정된다.",
+      "extraAnswers": [],
+      "note": "엄밀히는 사원.부서코드에 DEFAULT 선언이 없어 SET DEFAULT 도 결과적으로 NULL 이 들어가지만, 조건이 「NULL 로 바뀐다」고 명시하고 있어 실기 수준에서 SET NULL 로 수렴한다. 완전히 막고 싶으면 조건에 「(기본값이 아니라) NULL」 한 마디를 더하거나 그대로 두어도 무방하다."
+    },
+    {
+      "index": 3,
+      "verdict": "pass",
+      "reason": "순차 재추적: UPDATE 조건 부서='영업' AND 보너스 IS NULL → 3번 박산(영업, NULL)·6번 한결(영업, NULL)만 40 으로 변경, 1번 김하늘(영업, 50)·2번 이바다(개발, NULL)·7번 서진(인사, NULL)은 제외. 상태 1:50 2:NULL 3:40 4:30 5:80 6:40 7:NULL. DELETE 조건 급여<250 → 3번(200)만 해당(7번은 260 이라 비해당) / 이름 LIKE '서%' → 서진(7번)만 해당(김하늘·이바다·박산·최강·정우·한결 중 '서'로 시작하는 이름 없음) → 3·7 삭제. 남은 5행 보너스 = 50, NULL, 30, 80, 40 → COUNT(*)=5, COUNT(보너스)=4(NULL 제외), AVG(보너스)=(50+30+80+40)/4=200/4=50 (INT 열에서 정수 나눗셈을 하는 DBMS 에서도 50 으로 동일). Node 교차 확인(verify/sql/check.js) updated=[3,6]·deleted=[3,7]·[5,4,50] 일치. 해설의 오답 경로(NULL 을 0 으로 보면 200/5=40, UPDATE 누락 시 160/3=53.33) 계산도 맞다. parts 라벨이 지문의 COUNT(*), COUNT(보너스), AVG(보너스) 순서와 일치.",
+      "extraAnswers": [
+        { "label": "COUNT(*)", "answers": ["5행", "5개"] },
+        { "label": "COUNT(보너스)", "answers": ["4개", "4행"] },
+        { "label": "AVG(보너스)", "answers": ["50.000"] }
+      ],
+      "note": "UPDATE 가 DELETE 대상인 3번도 바꾸므로 「UPDATE 는 했지만 삭제돼 평균에 안 들어가는 행」이 있다는 점이 함정 설계로 적절하다. 난이도 「상」은 다소 높게 잡힌 편이나 순차 추적 3단계라 수용 가능."
+    }
+  ]
+}
