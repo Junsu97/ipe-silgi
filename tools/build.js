@@ -52,6 +52,8 @@ const SETS = ROUNDS.map((ids, r) => ({
     return { id: q.id, bucketLabel: q.bucketLabel, type: q.type, language: q.language, question: q.question, code: q.code, parts: q.parts, explanation: q.explanation, difficulty: q.difficulty, point: q.point };
   }),
 }));
+// 사용자가 제공한 HTML에서 추출한 회차. 기존 모의고사와 동일한 화면을 사용한다.
+for (const set of JSON.parse(fs.readFileSync(P('data', 'imported-sets.json'), 'utf8'))) SETS.push(set);
 const spare = Object.keys(all).filter(id => !used.has(id));
 
 // 개념정리 + 감수 보완 5건
@@ -91,7 +93,7 @@ const index = [
   '<meta name="mobile-web-app-capable" content="yes">',
   '<meta name="apple-mobile-web-app-title" content="정처기 실기">',
   '<meta name="apple-mobile-web-app-status-bar-style" content="default">',
-  '<meta name="description" content="정보처리기사 실기 필답형 모의고사 3회분, 해설집, 개념정리">',
+  '<meta name="description" content="정보처리기사 실기 필답형 모의고사와 회차별 기출 풀이">',
   '<link rel="manifest" href="manifest.webmanifest">',
   '<link rel="apple-touch-icon" href="apple-touch-icon.png">',
   '<link rel="icon" type="image/png" href="icon-192.png">',
@@ -105,6 +107,14 @@ const index = [
   '',
 ].join('\n');
 fs.writeFileSync(P('docs', 'index.html'), index);
+const imageSource = P('data', 'imported-images'), imageTarget = P('docs', 'imported-images');
+fs.mkdirSync(imageTarget, { recursive: true });
+const usedImages = new Set(SETS.flatMap(set => set.questions.flatMap(q => (q.images || []).map(src => path.basename(src)))));
+for (const filename of fs.readdirSync(imageTarget)) if (!usedImages.has(filename)) fs.unlinkSync(path.join(imageTarget, filename));
+for (const filename of usedImages) fs.copyFileSync(path.join(imageSource, filename), path.join(imageTarget, filename));
+const workerPath = P('docs', 'sw.js');
+const worker = fs.readFileSync(workerPath, 'utf8').replace(/^const IMAGE_ASSETS = .*;$/m, 'const IMAGE_ASSETS = ' + JSON.stringify([...usedImages].map(name => './imported-images/' + name)) + ';');
+fs.writeFileSync(workerPath, worker);
 fs.writeFileSync(P('dist', 'built-sets.json'), JSON.stringify(SETS, null, 1));
 
 console.log('sets:', SETS.map(s => s.name + ' ' + s.questions.length).join(', '));

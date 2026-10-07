@@ -138,6 +138,7 @@ pre.code .ln::before { counter-increment: ln; content: counter(ln); display: inl
 .key-answer { font-weight: 700; font-family: var(--mono); white-space: pre-wrap; word-break: break-word; font-size: 15px; }
 .key-alt { color: var(--ink-3); font-size: 12.5px; }
 .key-exp { white-space: pre-wrap; }
+.q-image { display: block; max-width: 100%; height: auto; margin: 12px auto; border-radius: 6px; }
 .my-answer { font-family: var(--mono); white-space: pre-wrap; word-break: break-word; }
 
 /* 시험 하단 바 */
@@ -245,7 +246,7 @@ const PWA = /*PWA*/false/*PWA_END*/;
 const POINTS = 5;
 const ICON_BACK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
 const ICON_CLOSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
-const PASS = 60;
+const passOf = (set, score) => score >= set.questions.length * POINTS * 0.6;
 const TIME_LIMIT_MIN = 150;
 
 // ---------- 유틸 ----------
@@ -288,6 +289,7 @@ function renderCode(q) {
   if (!q.code) return '';
   return '<div class="code-lang">' + esc(q.language || 'code') + '</div><div class="code-wrap"><pre class="code">' + String(q.code).replace(/\r/g, '').replace(/\n+$/, '').split('\n').map(l => '<span class="ln">' + esc(l) + '</span>').join('') + '</pre></div>';
 }
+function renderImages(q) { return (q.images || []).map((src, i) => '<img class="q-image" src="' + esc(src) + '" alt="' + esc('문항 그림 ' + (i + 1)) + '" loading="lazy">').join(''); }
 function firstLine(q) { const t = String(q.question).split('\n').find(l => l.trim() && !/^\s*[|`#-]/.test(l)) || ''; return t.length > 80 ? t.slice(0, 80) + '…' : t; }
 
 // ---------- 저장소 ----------
@@ -359,13 +361,13 @@ function render() {
 
 // ---------- 홈 ----------
 function renderHome() {
-  topEl.innerHTML = '<div class="top-in"><div class="top-title">정보처리기사 실기</div><span class="top-sub">필답형 · 20문항 · 60점 합격</span></div>';
+  topEl.innerHTML = '<div class="top-in"><div class="top-title">정보처리기사 실기</div><span class="top-sub">필답형 문제 풀이</span></div>';
   const hist = store.get(K.hist, []);
   const cards = SETS.map(set => {
     const a = getAttempt(set.key); const s = summarize(set, a);
     const last = hist.find(h => h.set === set.key);
     let status, bar = '';
-    if (a.submitted) status = '<span class="pill ' + (s.score >= PASS ? 'pass' : 'fail') + '">' + s.score + '점 · ' + (s.score >= PASS ? '합격' : '불합격') + '</span><span>' + fmtDate(a.submittedAt) + '</span>';
+    if (a.submitted) status = '<span class="pill ' + (passOf(set, s.score) ? 'pass' : 'fail') + '">' + s.score + '점 · ' + (passOf(set, s.score) ? '합격' : '불합격') + '</span><span>' + fmtDate(a.submittedAt) + '</span>';
     else if (s.locked || Object.keys(a.revealed).length) { status = '<span class="pill live">진행 중</span><span>답 입력 ' + s.locked + ' / ' + s.total + '</span><span>' + fmtSec(elapsedOf(a)) + ' 경과</span>'; bar = '<div class="progress"><i style="width:' + Math.round(100 * s.locked / s.total) + '%"></i></div>'; }
     else status = '<span class="pill">미응시</span>' + (last ? '<span>최근 ' + last.score + '점 · ' + fmtDate(last.date) + '</span>' : '');
     const btns = a.submitted
@@ -374,13 +376,13 @@ function renderHome() {
     return '<article class="set-card"><div class="name">' + esc(set.name) + '</div><div class="stat">' + status + '</div>' + bar + '<div class="btn-row">' + btns + '</div></article>';
   }).join('');
   const histHtml = hist.length
-    ? '<div class="hist">' + hist.slice(0, 15).map(h => '<div class="hist-row"><div>' + esc(h.name) + '<div class="d">' + fmtDate(h.date) + (h.elapsed ? ' · ' + fmtSec(h.elapsed) : '') + '</div></div><b>' + h.score + '점</b><span class="pill ' + (h.score >= PASS ? 'pass' : 'fail') + '">' + (h.score >= PASS ? '합격' : '불합격') + '</span></div>').join('') + '</div>'
+    ? '<div class="hist">' + hist.slice(0, 15).map(h => { const passed = passOf(setOf(h.set), h.score); return '<div class="hist-row"><div>' + esc(h.name) + '<div class="d">' + fmtDate(h.date) + (h.elapsed ? ' · ' + fmtSec(h.elapsed) : '') + '</div></div><b>' + h.score + '점</b><span class="pill ' + (passed ? 'pass' : 'fail') + '">' + (passed ? '합격' : '불합격') + '</span></div>'; }).join('') + '</div>'
     : '<div class="empty">제출한 시험이 아직 없습니다</div>';
   viewEl.className = 'view';
-  viewEl.innerHTML = '<div class="eyebrow">국가기술자격 실기시험 · 필답형 모의고사</div><h1 class="h-display" style="margin-top:4px">정보처리기사 실기</h1><p class="muted" style="margin:6px 0 0">20문항 × 5점, 100점 만점. 60점 이상 합격. 실제 시험시간은 150분.</p>'
+  viewEl.innerHTML = '<div class="eyebrow">국가기술자격 실기시험 · 필답형 문제 풀이</div><h1 class="h-display" style="margin-top:4px">정보처리기사 실기</h1><p class="muted" style="margin:6px 0 0">모의고사와 기출 회차별 풀이. 문항당 5점, 60% 이상 합격 기준. 실제 시험시간은 150분.</p>'
     + '<div class="section" style="margin-top:18px">' + cards + '</div>'
     + '<div class="section"><div class="section-h"><h2>응시 기록</h2>' + (hist.length ? '<button class="link-btn" data-act="clear-hist">기록 지우기</button>' : '') + '</div>' + histHtml + '</div>'
-    + '<p class="foot">출제 기준(NCS 기반, 2020년 개정)과 기출 유형을 참고해 새로 작성한 문항입니다. 실제 기출문제를 그대로 옮기지 않았습니다. 답안·점수·기록은 이 기기의 브라우저에만 저장됩니다.</p>';
+    + '<p class="foot">제1~3회 모의고사는 새로 작성한 문항입니다. 연도별 기출은 제공받은 자료의 문제와 답안을 옮겼으며 서술형 답안은 표현 차이로 자동 채점 결과가 다를 수 있습니다. 답안·점수·기록은 이 기기의 브라우저에만 저장됩니다.</p>';
 }
 
 // ---------- 시험 ----------
@@ -401,7 +403,7 @@ function renderExam() {
     const id = 'q' + qi + 'p' + pi; const val = esc(vals[pi] || '');
     const label = q.parts.length === 1 && p.label === '정답' ? '답' : p.label;
     const field = q.type === 'code'
-      ? '<textarea id="' + id + '" data-p="' + pi + '" placeholder="출력 결과를 그대로 입력 (여러 줄이면 줄바꿈)" spellcheck="false" autocomplete="off" autocapitalize="off"' + (ro ? ' readonly' : '') + '>' + val + '</textarea>'
+      ? '<textarea id="' + id + '" data-p="' + pi + '" placeholder="답안을 입력하세요 (여러 줄 입력 가능)" spellcheck="false" autocomplete="off" autocapitalize="off"' + (ro ? ' readonly' : '') + '>' + val + '</textarea>'
       : '<input id="' + id + '" data-p="' + pi + '" type="text" placeholder="답안 기재" value="' + val + '" autocomplete="off" spellcheck="false" autocapitalize="off" enterkeyhint="done"' + (ro ? ' readonly' : '') + '>';
     return '<div class="part"><label class="part-label" for="' + id + '">' + esc(label) + '</label>' + field + '</div>';
   }).join('');
@@ -424,7 +426,7 @@ function renderExam() {
 
   viewEl.className = 'view exam';
   viewEl.innerHTML = '<article class="q" data-state="' + state + '"><div class="q-head"><span class="q-num">' + (qi + 1) + '.</span><span class="chip">' + esc(q.bucketLabel) + '</span><span class="q-points">배점 ' + POINTS + '점</span></div>'
-    + '<div class="q-text">' + renderText(q.question) + '</div>' + renderCode(q)
+    + '<div class="q-text">' + renderText(q.question) + '</div>' + renderCode(q) + renderImages(q)
     + '<div class="answers">' + parts + '</div>'
     + '<div class="status-line" style="margin-top:12px">' + status + '</div>'
     + (actions ? '<div class="q-actions">' + actions + '</div>' : '') + key + '</article>'
@@ -471,13 +473,13 @@ function submit() {
 function renderResult() {
   const set = setOf(ui.setKey), a = getAttempt(ui.setKey);
   if (!a.submitted) { ui.view = 'exam'; saveUi(); return renderExam(); }
-  const s = summarize(set, a); const pass = s.score >= PASS;
+  const s = summarize(set, a); const maxScore = s.total * POINTS, pass = passOf(set, s.score);
   topEl.innerHTML = '<div class="top-in"><button class="icon-btn" data-act="home" aria-label="홈으로">' + ICON_BACK + '</button><div class="top-title">' + esc(set.name) + ' 결과</div></div>';
   const byTopic = {};
   set.questions.forEach((q, i) => { const k = q.bucketLabel; byTopic[k] = byTopic[k] || { n: 0, c: 0 }; byTopic[k].n++; if (s.per[i].correct) byTopic[k].c++; });
   const cells = set.questions.map((q, i) => '<button class="cell" type="button" data-act="key-goto" data-i="' + i + '" data-state="' + (s.per[i].correct ? 'correct' : 'wrong') + '" aria-label="' + (i + 1) + '번 해설">' + (i + 1) + '</button>').join('');
   viewEl.className = 'view';
-  viewEl.innerHTML = '<div class="result-card"><div><div class="score">' + s.score + '<small>/ 100점</small></div><div style="margin-top:8px"><span class="verdict ' + (pass ? 'pass' : 'fail') + '">' + (pass ? '합격' : '불합격') + '</span></div></div>'
+  viewEl.innerHTML = '<div class="result-card"><div><div class="score">' + s.score + '<small>/ ' + maxScore + '점</small></div><div style="margin-top:8px"><span class="verdict ' + (pass ? 'pass' : 'fail') + '">' + (pass ? '합격' : '불합격') + '</span></div></div>'
     + '<div class="muted">' + s.total + '문항 중 ' + s.correct + '문항 정답 · 미응답 ' + (s.total - s.locked) + '문항 · 소요 ' + fmtSec(a.elapsed || 0) + ' · ' + fmtDate(a.submittedAt) + '</div>'
     + '<div class="by-topic">' + Object.entries(byTopic).map(([k, v]) => '<div><span>' + esc(k) + '</span><b>' + v.c + ' / ' + v.n + '</b></div>').join('') + '</div></div>'
     + '<div class="section"><div class="section-h"><h2>문항별 결과</h2><span class="muted" style="font-size:12.5px">번호를 누르면 해설</span></div><div class="result-cells">' + cells + '</div></div>'
@@ -496,7 +498,7 @@ function renderKey() {
     const g = hasResult ? s.per[i] : null;
     const badge = g ? (g.correct ? '<span class="mark correct" style="font-size:12px"><span class="glyph" style="width:18px;height:18px;border-width:2px"></span></span>' : g.answered ? '<span class="mark wrong" style="font-size:12px"><span class="glyph" style="width:18px;height:18px"></span></span>' : '<span class="pill">미응답</span>') : '';
     return '<details class="key-item" id="k' + i + '"' + (ui.keyOpen === i ? ' open' : '') + '><summary><span class="n">' + (i + 1) + '</span><span class="t"><small>' + esc(q.bucketLabel) + (q.point ? ' · ' + esc(q.point) : '') + '</small>' + esc(firstLine(q)) + '</span>' + badge + '</summary>'
-      + '<div class="body"><div class="q-text">' + renderText(q.question) + '</div>' + renderCode(q) + keyHtml(q, g && g.answered ? g.parts : null, hasResult ? (a.answers[i] || []) : null) + '</div></details>';
+      + '<div class="body"><div class="q-text">' + renderText(q.question) + '</div>' + renderCode(q) + renderImages(q) + keyHtml(q, g && g.answered ? g.parts : null, hasResult ? (a.answers[i] || []) : null) + '</div></details>';
   }).join('') : '<div class="empty">표시할 문항이 없습니다</div>';
   viewEl.className = 'view';
   viewEl.innerHTML = seg + filter + (hasResult ? '' : '<p class="muted" style="margin:10px 0 0;font-size:13px">제출한 시험이 있으면 오답만 모아 볼 수 있습니다.</p>') + '<div class="section" style="margin-top:14px">' + list + '</div>';
