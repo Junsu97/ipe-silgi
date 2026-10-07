@@ -11,7 +11,13 @@ const PORT = 9347;
 fs.mkdirSync(OUT, { recursive: true });
 // 실행마다 새 프로필 폴더(이전 실행이 남긴 잠금과 겹치지 않게)
 const profile = path.join(__dirname, 'profile-' + process.pid);
-const stopEdge = () => { try { spawnSync('taskkill', ['/PID', String(edge.pid), '/T', '/F'], { stdio: 'ignore' }); } catch (_) {} try { fs.rmSync(profile, { recursive: true, force: true }); } catch (_) {} };
+// Edge 는 자식 프로세스를 따로 띄우므로, 이 실행의 프로필 폴더를 쓰는 msedge 를 모두 찾아 종료한다
+const stopEdge = () => {
+  const tag = path.basename(profile);
+  const ps = `Get-CimInstance Win32_Process -Filter "Name = 'msedge.exe'" | Where-Object { $_.CommandLine -like '*${tag}*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }`;
+  try { spawnSync('powershell', ['-NoProfile', '-Command', ps], { stdio: 'ignore' }); } catch (_) {}
+  for (let i = 0; i < 10; i++) { try { fs.rmSync(profile, { recursive: true, force: true }); break; } catch (_) { spawnSync('powershell', ['-NoProfile', '-Command', 'Start-Sleep -Milliseconds 300'], { stdio: 'ignore' }); } }
+};
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const edge = spawn(EDGE, ['--headless=new', `--remote-debugging-port=${PORT}`, `--user-data-dir=${profile}`, '--no-first-run', '--no-default-browser-check', '--disable-extensions', 'about:blank'], { stdio: 'ignore' });
