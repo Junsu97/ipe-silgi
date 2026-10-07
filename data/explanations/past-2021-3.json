@@ -36,7 +36,7 @@
     "answerCheck": "ok"
   },
   "past-2021-3-7": {
-    "explanation": "(A) 전체와 부분의 관계(Part-of)를 나타내면서 부분이 전체와 독립적으로 존재할 수 있는 관계는 집합(Aggregation)이다. (B) 상위 개념과 하위 개념이 IS-A 관계를 이루는 것은 일반화(Generalization)이다. 같은 전체-부분 관계라도 부분이 전체와 생명주기를 함께하면 합성(Composition)이 되는데, 이 문제는 전체-부분 관계를 일반적으로 묻고 있어 Aggregation이 답이다. 인터페이스를 구현하는 Realization, 일시적으로 사용하는 Dependency와도 구분한다. 저장된 답의 (1), (2)는 각각 빈칸 A, B에 해당한다.",
+    "explanation": "(A) 전체와 부분의 관계(Part-of)를 나타내면서 부분이 전체와 독립적으로 존재할 수 있는 관계는 집합(Aggregation)이다. (B) 상위 개념과 하위 개념이 IS-A 관계를 이루는 것은 일반화(Generalization)이다. 같은 전체-부분 관계라도 부분이 전체와 생명주기를 함께하면 합성(Composition)이 되는데, 이 문제는 전체-부분 관계를 일반적으로 묻고 있어 Aggregation이 답이다. 인터페이스를 구현하는 Realization, 일시적으로 사용하는 Dependency와도 구분한다.",
     "point": "UML 집합·일반화 관계",
     "area": "소프트웨어 설계",
     "answerCheck": "ok"

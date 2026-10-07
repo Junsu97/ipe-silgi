@@ -1,0 +1,271 @@
+{
+  "past-2021-2-1": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "애드혹 네트워크",
+          "애드혹 네트워크(Ad-hoc Network)",
+          "애드혹",
+          "Ad-hoc Network",
+          "Ad-hoc"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 안·밖 표기 인정"
+  },
+  "past-2021-2-2": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "UX",
+          "UX(User Experience)",
+          "User Experience",
+          "사용자 경험"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "UI",
+          "UI(User Interface)",
+          "User Interface",
+          "사용자 인터페이스"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (1), (2) 분리"
+  },
+  "past-2021-2-4": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "2",
+          "제2정규형",
+          "2정규형",
+          "2NF"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호에 숫자만 쓴 표기 인정"
+  },
+  "past-2021-2-5": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "UPDATE"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "SET"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B 분리"
+  },
+  "past-2021-2-6": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "ON"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "학과"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B 분리"
+  },
+  "past-2021-2-8": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "AES",
+          "AES (Advanced Encryption Standard)",
+          "Advanced Encryption Standard"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 안·밖 표기 인정"
+  },
+  "past-2021-2-9": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "구문 커버리지",
+          "구문",
+          "Statement Coverage"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "결정 커버리지",
+          "결정",
+          "Decision Coverage"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "조건 커버리지",
+          "조건",
+          "Condition Coverage"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (1), (2), (3) 분리"
+  },
+  "past-2021-2-10": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "'이%'"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "이름 DESC"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B 분리"
+  },
+  "past-2021-2-11": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "절차적 응집도",
+          "절차적",
+          "절차적(procedural)",
+          "Procedural",
+          "Procedural Cohesion"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "교환적 응집도",
+          "교환적",
+          "교환적(communication)",
+          "Communication",
+          "Communicational Cohesion"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "기능적 응집도",
+          "기능적",
+          "기능적(functional)",
+          "Functional",
+          "Functional Cohesion"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (1), (2), (3) 분리"
+  },
+  "past-2021-2-12": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "가상 회선 방식",
+          "가상 회선",
+          "Virtual Circuit"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "데이터그램 방식",
+          "데이터그램",
+          "Datagram"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (1), (2) 분리"
+  },
+  "past-2021-2-13": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "행위",
+          "행위(behavioral)",
+          "Behavioral",
+          "행위 패턴",
+          "Behavioral Pattern"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 안·밖 표기 인정"
+  },
+  "past-2021-2-15": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "Function Modeling",
+          "Function",
+          "기능 모델링"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "Dynamic Modeling",
+          "Dynamic",
+          "동적 모델링"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "Information Modeling",
+          "Information",
+          "정보 모델링"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (1), (2), (3) 분리"
+  }
+}

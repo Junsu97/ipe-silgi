@@ -1,0 +1,222 @@
+{
+  "past-2024-1-3": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "1번째",
+        "answers": [
+          "ㄱ",
+          "ㄱ. 기능"
+        ]
+      },
+      {
+        "label": "2번째",
+        "answers": [
+          "ㄴ",
+          "ㄴ. 교환"
+        ]
+      },
+      {
+        "label": "3번째",
+        "answers": [
+          "ㄹ",
+          "ㄹ. 시간"
+        ]
+      },
+      {
+        "label": "4번째",
+        "answers": [
+          "ㄷ",
+          "ㄷ. 우연"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "높은 순 나열을 순서 칸 4개로 분리, 보기 기호 단독/기호+용어 인정"
+  },
+  "past-2024-1-5": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "2번",
+        "answers": [
+          "192.168.35.72"
+        ]
+      },
+      {
+        "label": "4번",
+        "answers": [
+          "129.200.8.249"
+        ]
+      },
+      {
+        "label": "5번",
+        "answers": [
+          "192.168.36.249"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "2번·4번·5번 IP 칸 분리"
+  },
+  "past-2024-1-7": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "OSPF",
+          "OSPF(Open Shortest Path First)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 안·밖 표기 분리 (영문 약자 지정)"
+  },
+  "past-2024-1-8": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "세타 조인",
+          "세타",
+          "Theta Join",
+          "세타 조인(Theta Join)"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "동등 조인",
+          "동등",
+          "Equi Join",
+          "동등 조인(Equi Join)"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "자연 조인",
+          "자연",
+          "Natural Join",
+          "자연 조인(Natural Join)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (1)(2)(3) 분리"
+  },
+  "past-2024-1-9": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1) LRU",
+        "answers": [
+          "6",
+          "6회",
+          "6번"
+        ]
+      },
+      {
+        "label": "(2) LFU",
+        "answers": [
+          "6",
+          "6회",
+          "6번"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "LRU·LFU 두 값 칸 분리, 단위 유무 인정"
+  },
+  "past-2024-1-10": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "1번째 ( )",
+        "answers": [
+          "6",
+          "⑥"
+        ]
+      },
+      {
+        "label": "2번째 ( )",
+        "answers": [
+          "3",
+          "③"
+        ]
+      },
+      {
+        "label": "3번째 ( )",
+        "answers": [
+          "1",
+          "①"
+        ]
+      },
+      {
+        "label": "4번째 ( )",
+        "answers": [
+          "7",
+          "⑦"
+        ]
+      },
+      {
+        "label": "5번째 ( )",
+        "answers": [
+          "2",
+          "②"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "실행 순서 빈칸 5개 분리, 숫자/원문자 인정"
+  },
+  "past-2024-1-14": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "ㄹ",
+          "ㄹ. 변경 조건/결정 커버리지",
+          "변경 조건/결정 커버리지",
+          "MC/DC"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "보기 기호 단독/기호+용어 인정 (보기에서 골라 작성)"
+  },
+  "past-2024-1-15": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "ㅅ",
+          "ㅅ. Rootkit",
+          "Rootkit",
+          "루트킷"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "보기 기호 단독/기호+용어 인정 (용어를 골라 작성)"
+  },
+  "past-2024-1-17": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "ㅅ",
+          "ㅅ. APT",
+          "APT"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "보기 기호 단독/기호+용어 인정 (용어를 골라 작성)"
+  }
+}

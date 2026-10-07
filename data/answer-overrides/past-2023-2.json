@@ -1,0 +1,298 @@
+{
+  "past-2023-2-2": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "a",
+        "answers": [
+          "m / 1000"
+        ]
+      },
+      {
+        "label": "b",
+        "answers": [
+          "(m % 1000) / 500"
+        ]
+      },
+      {
+        "label": "c",
+        "answers": [
+          "(m % 500) / 100"
+        ]
+      },
+      {
+        "label": "d",
+        "answers": [
+          "(m % 100) / 10"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "코드 a~d 괄호 칸 분리"
+  },
+  "past-2023-2-6": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "ㅇ",
+          "ㅇ. 조건 커버리지"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "보기 기호 단독과 기호+용어 인정"
+  },
+  "past-2023-2-8": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "템퍼 프루핑",
+          "Tamper Proofing",
+          "템퍼 프루핑(Tamper proofing)",
+          "탬퍼 프루핑"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 병기 답을 인정 표기로 펼침"
+  },
+  "past-2023-2-10": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "1단계",
+        "answers": [
+          "요구조건 분석",
+          "요구사항 분석"
+        ]
+      },
+      {
+        "label": "2단계",
+        "answers": [
+          "개념적 설계",
+          "개념 설계"
+        ]
+      },
+      {
+        "label": "3단계",
+        "answers": [
+          "논리적 설계",
+          "논리 설계"
+        ]
+      },
+      {
+        "label": "4단계",
+        "answers": [
+          "물리적 설계",
+          "물리 설계"
+        ]
+      },
+      {
+        "label": "5단계",
+        "answers": [
+          "구현"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "설계 순서 5칸 분리(순서 있음)"
+  },
+  "past-2023-2-11": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "[1]",
+        "answers": [
+          "Singleton",
+          "싱글톤",
+          "싱글턴",
+          "Singleton Pattern",
+          "싱글톤 패턴"
+        ]
+      },
+      {
+        "label": "[2]",
+        "answers": [
+          "Visitor",
+          "비지터",
+          "방문자",
+          "Visitor Pattern",
+          "비지터 패턴"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "지문 [1][2] 칸 분리"
+  },
+  "past-2023-2-12": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "hamming",
+          "해밍"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "FEC",
+          "Forward Error Correction"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "BEC",
+          "Business Email Compromise"
+        ]
+      },
+      {
+        "label": "(4)",
+        "answers": [
+          "parity",
+          "패리티"
+        ]
+      },
+      {
+        "label": "(5)",
+        "answers": [
+          "CRC",
+          "Cyclic Redundancy Check"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "지문 (1)~(5) 칸 분리"
+  },
+  "past-2023-2-13": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "ㄷ",
+          "ㄷ. 정보"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "ㄴ",
+          "ㄴ. 감독"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "ㅂ",
+          "ㅂ. 비번호"
+        ]
+      },
+      {
+        "label": "(4)",
+        "answers": [
+          "ㅊ",
+          "ㅊ. 비동기균형"
+        ]
+      },
+      {
+        "label": "(5)",
+        "answers": [
+          "ㅋ",
+          "ㅋ. 비동기응답"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "지문 (1)~(5) 칸 분리, 기호 단독·기호+용어 인정"
+  },
+  "past-2023-2-15": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "대칭키",
+        "answers": [
+          "DES, AES, ARIA, SEED",
+          "DES, AES, SEED, ARIA",
+          "DES, ARIA, AES, SEED",
+          "DES, ARIA, SEED, AES",
+          "DES, SEED, AES, ARIA",
+          "DES, SEED, ARIA, AES",
+          "AES, DES, ARIA, SEED",
+          "AES, DES, SEED, ARIA",
+          "AES, ARIA, DES, SEED",
+          "AES, ARIA, SEED, DES",
+          "AES, SEED, DES, ARIA",
+          "AES, SEED, ARIA, DES",
+          "ARIA, DES, AES, SEED",
+          "ARIA, DES, SEED, AES",
+          "ARIA, AES, DES, SEED",
+          "ARIA, AES, SEED, DES",
+          "ARIA, SEED, DES, AES",
+          "ARIA, SEED, AES, DES",
+          "SEED, DES, AES, ARIA",
+          "SEED, DES, ARIA, AES",
+          "SEED, AES, DES, ARIA",
+          "SEED, AES, ARIA, DES",
+          "SEED, ARIA, DES, AES",
+          "SEED, ARIA, AES, DES"
+        ]
+      },
+      {
+        "label": "비대칭키",
+        "answers": [
+          "RSA, ECC",
+          "ECC, RSA"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "대칭키·비대칭키 2칸 분리, 칸 안의 나열 순서 무관(순열 인정)"
+  },
+  "past-2023-2-16": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "해시",
+          "Hash",
+          "해시(hash)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 병기 답을 인정 표기로 펼침"
+  },
+  "past-2023-2-20": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "[1]",
+        "answers": [
+          "스텁",
+          "테스트 스텁",
+          "Stub",
+          "Test Stub"
+        ]
+      },
+      {
+        "label": "[2]",
+        "answers": [
+          "드라이버",
+          "테스트 드라이버",
+          "Driver",
+          "Test Driver"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "지문 [1][2] 칸 분리, 메모의 「테스트」 접두 표기 인정"
+  }
+}

@@ -251,16 +251,17 @@ const TIME_LIMIT_MIN = 150;
 
 // ---------- 유틸 ----------
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const normShort = s => String(s ?? '').normalize('NFC').toLowerCase().replace(/[\s ]/g, '').replace(/[.\-_·/()\[\]{}'"‘’“”,:;!?~→⇒>]/g, '');
+const normShort = s => String(s ?? '').normalize('NFC').toLowerCase().replace(/[\s ]/g, '').replace(/[.\-_·/()\[\]{}'"‘’“”,:;!?~→➝➔➜⟶⇒>]/g, '');
 const normCode = s => String(s ?? '').normalize('NFC').replace(/\r/g, '').split('\n').map(l => l.replace(/[ \t\u00a0]+/g, ' ').trim().replace(/\s*([,\[\](){}:])\s*/g, '$1')).filter(l => l.length).join('\n');
 function isMatch(q, part, value) {
   const v = String(value ?? '');
   if (!v.trim()) return false;
   if (q.type === 'code') { const a = normCode(v); return part.answers.some(x => normCode(x) === a); }
   const a = normShort(v);
-  // 정답이 기호뿐이면(예: -> , →) 정규화 후 빈 문자열이 되므로 기호 자체를 비교한다
-  if (!a) { const sym = s => String(s ?? '').normalize('NFC').replace(/\s/g, '').replace(/→/g, '->').replace(/⇒/g, '=>'); const b = sym(v); return !!b && part.answers.some(x => !normShort(x) && sym(x) === b); }
-  return part.answers.some(x => normShort(x) === a);
+  // 정답이 기호뿐이면(예: -> , != , %) 기호를 그대로 비교한다. 일반 정규화는 기호를 지워 서로 다른 답이 같아지기 때문
+  const sym = s => String(s ?? '').normalize('NFKC').replace(/\s/g, '').replace(/[→➝➔➜⟶]/g, '->').replace(/⇒/g, '=>');
+  const symOnly = s => !/[\p{L}\p{N}]/u.test(String(s ?? ''));
+  return part.answers.some(x => symOnly(x) ? (sym(x) !== '' && sym(x) === sym(v)) : (!!a && normShort(x) === a));
 }
 const fmtDate = ts => { const d = new Date(ts); return (d.getMonth() + 1) + '월 ' + d.getDate() + '일 ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
 const fmtSec = s => { s = Math.max(0, Math.floor(s)); const m = Math.floor(s / 60), h = Math.floor(m / 60); return (h ? h + ':' : '') + String(m % 60).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); };
@@ -313,7 +314,22 @@ const saveAttempt = (setKey, a) => store.set(K.att(setKey), a);
 
 function gradeQ(q, a, qi) {
   const vals = a.answers[qi] || []; const locked = !!a.locked[qi];
-  const parts = q.parts.map((p, pi) => locked && isMatch(q, p, vals[pi]));
+  let parts = q.parts.map((p, pi) => locked && isMatch(q, p, vals[pi]));
+  // 순서 무관 문항: 입력 칸마다 아직 쓰이지 않은 정답 칸 중 맞는 것을 찾는다(칸 수가 적어 전수 탐색)
+  if (locked && q.unordered && q.parts.length > 1) {
+    const n = q.parts.length; let best = null;
+    const used = new Array(n).fill(false), cur = [];
+    const walk = i => {
+      if (best && best.filter(Boolean).length === n) return;
+      if (i === n) { if (!best || cur.filter(Boolean).length > best.filter(Boolean).length) best = cur.slice(); return; }
+            for (let j = 0; j < n; j++) if (!used[j] && isMatch(q, q.parts[j], vals[i])) { used[j] = true; cur.push(true); walk(i + 1); cur.pop(); used[j] = false; }
+      cur.push(false); walk(i + 1); cur.pop();
+    };
+    walk(0); parts = best || parts;
+    // 같은 답을 여러 칸에 쓰면 처음 한 칸만 인정
+    const norm = x => q.type === 'code' ? normCode(x) : normShort(x), seen = new Set();
+    parts = parts.map((ok, i) => { const k = norm(vals[i]) || String(vals[i] ?? '').replace(/\s/g, ''); if (!ok) return false; if (seen.has(k)) return false; seen.add(k); return true; });
+  }
   return { answered: locked, correct: locked && parts.every(Boolean), parts };
 }
 function summarize(set, a) {
@@ -429,6 +445,7 @@ function renderExam() {
   viewEl.className = 'view exam';
   viewEl.innerHTML = '<article class="q" data-state="' + state + '"><div class="q-head"><span class="q-num">' + (qi + 1) + '.</span><span class="chip">' + esc(q.bucketLabel) + '</span><span class="q-points">배점 ' + POINTS + '점</span></div>'
     + '<div class="q-text">' + renderText(q.question) + '</div>' + renderCode(q) + renderImages(q)
+    + (q.unordered ? '<p class="muted" style="margin:14px 0 0;font-size:13px">칸 순서는 상관없습니다</p>' : '')
     + '<div class="answers">' + parts + '</div>'
     + '<div class="status-line" style="margin-top:12px">' + status + '</div>'
     + (actions ? '<div class="q-actions">' + actions + '</div>' : '') + key + '</article>'
@@ -536,8 +553,8 @@ document.addEventListener('click', e => {
     case 'restart': { const key = t.dataset.set; const nm = setOf(key).name; openSheet('<div class="sheet-h"><h3>' + esc(nm) + ' 다시 풀기</h3><button class="icon-btn" data-act="close-sheet" aria-label="닫기">' + ICON_CLOSE + '</button></div><p class="muted" style="margin:0">지금까지의 답안은 지워집니다. 제출한 점수는 응시 기록에 남습니다.</p><div class="btn-row"><button class="btn quiet" data-act="close-sheet">취소</button><button class="btn primary" data-act="restart-confirm" data-set="' + key + '">새로 시작</button></div>'); break; }
     case 'restart-confirm': { const key = t.dataset.set; flushTimer(); saveAttempt(key, newAttempt()); go('exam', { setKey: key, qi: 0 }); break; }
     case 'result': go('result', { setKey: t.dataset.set }); break;
-    case 'clear-hist': openSheet('<div class="sheet-h"><h3>응시 기록 지우기</h3><button class="icon-btn" data-act="close-sheet" aria-label="닫기">' + ICON_CLOSE + '</button></div><p class="muted" style="margin:0">제출한 점수 기록을 모두 지웁니다. 진행 중인 답안은 그대로 둡니다.</p><div class="btn-row"><button class="btn quiet" data-act="close-sheet">취소</button><button class="btn danger" data-act="clear-hist-confirm">지우기</button></div>'); break;
-    case 'clear-hist-confirm': store.del(K.hist); render(); break;
+    case 'clear-hist': openSheet('<div class="sheet-h"><h3>응시 기록 지우기</h3><button class="icon-btn" data-act="close-sheet" aria-label="닫기">' + ICON_CLOSE + '</button></div><p class="muted" style="margin:0">응시 기록과 회차별 제출 결과를 모두 지웁니다. 제출하지 않고 풀던 답안은 그대로 둡니다.</p><div class="btn-row"><button class="btn quiet" data-act="close-sheet">취소</button><button class="btn danger" data-act="clear-hist-confirm">지우기</button></div>'); break;
+    case 'clear-hist-confirm': store.del(K.hist); for (const s of SETS) { const at = store.get(K.att(s.key), null); if (at && at.submitted) store.del(K.att(s.key)); } render(); break;
     case 'prev': flushTimer(); ui.qi = Math.max(0, ui.qi - 1); saveUi(); renderExam(); window.scrollTo(0, 0); break;
     case 'next': flushTimer(); ui.qi = Math.min(set.questions.length - 1, ui.qi + 1); saveUi(); renderExam(); window.scrollTo(0, 0); break;
     case 'grid': openGrid(); break;

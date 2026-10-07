@@ -1,0 +1,255 @@
+{
+  "past-2022-1-2": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "1",
+        "answers": [
+          "REDO",
+          "재실행",
+          "REDO(재실행)"
+        ]
+      },
+      {
+        "label": "2",
+        "answers": [
+          "UNDO",
+          "취소",
+          "UNDO(취소)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "지문 1, 2 칸 분리"
+  },
+  "past-2022-1-4": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "TKIP",
+          "TKIP(Temporal Key Integrity Protocol)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 병기 답을 인정 표기로 펼침(영문 약어 요구)"
+  },
+  "past-2022-1-6": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "1",
+        "answers": [
+          "정적 분석 기법",
+          "정적 분석",
+          "정적 분석(Static Analysis)",
+          "Static Analysis"
+        ]
+      },
+      {
+        "label": "2",
+        "answers": [
+          "동적 분석 기법",
+          "동적 분석",
+          "동적 분석(Dynamic Analysis)",
+          "Dynamic Analysis"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "지문 1, 2 칸 분리, 기법 접미 유무 인정"
+  },
+  "past-2022-1-8": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "1",
+        "answers": [
+          "a",
+          "a. Equivalence Partitioning",
+          "Equivalence Partitioning",
+          "동등 분할",
+          "동치 분할"
+        ]
+      },
+      {
+        "label": "2",
+        "answers": [
+          "b",
+          "b. Boundary Value Analysis",
+          "Boundary Value Analysis",
+          "경계값 분석"
+        ]
+      },
+      {
+        "label": "3",
+        "answers": [
+          "e",
+          "e. Cause-effect Graph",
+          "Cause-effect Graph",
+          "원인-결과 그래프"
+        ]
+      }
+    ],
+    "unordered": true,
+    "reason": "보기 3가지 칸 분리, 순서 무관, 기호·기호+용어 인정"
+  },
+  "past-2022-1-10": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "유일성",
+          "Uniqueness",
+          "유일성(Uniqueness)"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "최소성",
+          "Minimality",
+          "최소성(Minimality)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B 분리(저장 답 1, 2 → 지문 표기)"
+  },
+  "past-2022-1-11": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "워터링 홀",
+          "Watering Hole",
+          "워터링 홀(Watering Hole)",
+          "워터링 홀 공격",
+          "Watering Hole Attack"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 병기 답을 인정 표기로 펼침"
+  },
+  "past-2022-1-12": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "a",
+        "answers": [
+          "단위 테스트",
+          "단위 시험",
+          "Unit Test"
+        ]
+      },
+      {
+        "label": "b",
+        "answers": [
+          "통합 테스트",
+          "통합 시험",
+          "Integration Test"
+        ]
+      },
+      {
+        "label": "c",
+        "answers": [
+          "시스템 테스트",
+          "시스템 시험",
+          "System Test"
+        ]
+      },
+      {
+        "label": "d",
+        "answers": [
+          "인수 테스트",
+          "인수 시험",
+          "Acceptance Test"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "그림 빈칸 a~d 분리"
+  },
+  "past-2022-1-13": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "ORDER"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "점수"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "DESC"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (1)(2)(3) 분리"
+  },
+  "past-2022-1-14": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "1",
+        "answers": [
+          "extend"
+        ]
+      },
+      {
+        "label": "2",
+        "answers": [
+          "pop"
+        ]
+      },
+      {
+        "label": "3",
+        "answers": [
+          "reverse"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "지문 1~3 칸 분리"
+  },
+  "past-2022-1-19": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          ">",
+          "＞",
+          "!="
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "%"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "/"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (1)(2)(3) 분리, 전각 ＞ 를 일반 > 로 대표"
+  }
+}

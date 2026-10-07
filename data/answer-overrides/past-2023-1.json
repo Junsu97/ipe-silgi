@@ -1,0 +1,239 @@
+{
+  "past-2023-1-4": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "AJAX",
+          "Asynchronous JavaScript and XML"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "지문이 Full Name 또는 약자를 허용하므로 둘 다 인정"
+  },
+  "past-2023-1-5": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "첫 번째 칸",
+        "answers": [
+          "가상 회선 방식",
+          "가상 회선",
+          "Virtual Circuit"
+        ]
+      },
+      {
+        "label": "두 번째 칸",
+        "answers": [
+          "데이터그램 방식",
+          "데이터그램",
+          "Datagram"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "표의 빈칸 2개 분리, 「방식」 접미 유무 인정"
+  },
+  "past-2023-1-8": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "웜",
+          "Worm"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "트로이 목마",
+          "Trojan Horse",
+          "Trojan"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "바이러스",
+          "Virus"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "표 (1)~(3) 칸 분리"
+  },
+  "past-2023-1-9": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(a)(b)",
+        "answers": [
+          "% 10",
+          "% 5",
+          "% 2",
+          "& 1",
+          "(a) % (b) 10",
+          "(a) % (b) 5",
+          "(a) % (b) 2",
+          "(a) & (b) 1"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "(a)(b)는 짝으로만 맞으므로(% 와 10·5·2, 또는 & 와 1) 한 칸에서 조합별로 인정. 칸을 나누면 「% 1」 같은 틀린 조합이 정답 처리됨"
+  },
+  "past-2023-1-12": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "①",
+        "answers": [
+          "튜플",
+          "Tuple"
+        ]
+      },
+      {
+        "label": "②",
+        "answers": [
+          "릴레이션 인스턴스",
+          "Relation Instance"
+        ]
+      },
+      {
+        "label": "③",
+        "answers": [
+          "카디널리티",
+          "Cardinality"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "지문 ①~③ 칸 분리"
+  },
+  "past-2023-1-14": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "①",
+        "answers": [
+          "idx2"
+        ]
+      },
+      {
+        "label": "②",
+        "answers": [
+          "nx"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "지문 ①② 칸 분리, 저장된 (1)(2) 표기를 지문 기준으로 맞춤"
+  },
+  "past-2023-1-18": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "외부",
+          "외부 스키마",
+          "External"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "개념",
+          "개념 스키마",
+          "Conceptual"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "내부",
+          "내부 스키마",
+          "Internal"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "표 (1)~(3) 칸 분리, 「스키마」 접미 유무 인정"
+  },
+  "past-2023-1-19": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "1234561, 124567",
+          "124567, 1234561",
+          "1234567, 124561",
+          "124561, 1234567"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "두 경로는 짝으로만 맞으므로 한 칸에서 두 조합과 순서 바뀐 표기를 인정. 「또는」 줄이 섞인 code 비교를 해소"
+  },
+  "past-2023-1-15": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "원소 1",
+        "answers": [
+          "한국",
+          "중국",
+          "베트남",
+          "홍콩",
+          "태국"
+        ]
+      },
+      {
+        "label": "원소 2",
+        "answers": [
+          "중국",
+          "베트남",
+          "홍콩",
+          "태국",
+          "한국"
+        ]
+      },
+      {
+        "label": "원소 3",
+        "answers": [
+          "베트남",
+          "홍콩",
+          "태국",
+          "한국",
+          "중국"
+        ]
+      },
+      {
+        "label": "원소 4",
+        "answers": [
+          "홍콩",
+          "태국",
+          "한국",
+          "중국",
+          "베트남"
+        ]
+      },
+      {
+        "label": "원소 5",
+        "answers": [
+          "태국",
+          "한국",
+          "중국",
+          "베트남",
+          "홍콩"
+        ]
+      }
+    ],
+    "unordered": true,
+    "reason": "집합 출력 순서가 실행마다 달라 원소 5칸·순서 무관으로 채점"
+  }
+}

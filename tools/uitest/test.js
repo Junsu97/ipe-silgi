@@ -1,5 +1,5 @@
 // 헤드리스 Edge + CDP 로 모바일 화면 흐름 점검 (서버 없이 file:// 로 연다)
-const { spawn } = require('child_process');
+const { spawn, spawnSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -9,8 +9,9 @@ const PAGE = 'file:///' + path.join(ROOT, 'docs', 'index.html').replace(/\\/g, '
 const OUT = path.join(__dirname, 'shots');
 const PORT = 9347;
 fs.mkdirSync(OUT, { recursive: true });
-const profile = path.join(__dirname, 'profile');
-fs.rmSync(profile, { recursive: true, force: true });
+// 실행마다 새 프로필 폴더(이전 실행이 남긴 잠금과 겹치지 않게)
+const profile = path.join(__dirname, 'profile-' + process.pid);
+const stopEdge = () => { try { spawnSync('taskkill', ['/PID', String(edge.pid), '/T', '/F'], { stdio: 'ignore' }); } catch (_) {} try { fs.rmSync(profile, { recursive: true, force: true }); } catch (_) {} };
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const edge = spawn(EDGE, ['--headless=new', `--remote-debugging-port=${PORT}`, `--user-data-dir=${profile}`, '--no-first-run', '--no-default-browser-check', '--disable-extensions', 'about:blank'], { stdio: 'ignore' });
@@ -177,6 +178,11 @@ const typeInto = (sel, value) => ev(`(() => { const el = document.querySelector(
   await click('[data-tab="home"]'); await sleep(200);
   expect(await ev(`document.querySelectorAll('.hist-row').length`) === 1, '홈 응시 기록 1건');
   await shot('12-home-after', true);
+  // 기록 지우기 → 응시 기록과 제출 결과가 함께 사라지는지
+  await click('[data-act="clear-hist"]'); await sleep(150);
+  await click('.sheet [data-act="clear-hist-confirm"]'); await sleep(200);
+  expect(await ev(`document.querySelectorAll('.hist-row').length`) === 0, '기록 지우기 후 응시 기록 0건');
+  expect(await ev(`!document.querySelector('[data-act="result"][data-set="r1"]') && !getAttempt('r1').submitted`), '기록 지우기 후 1회 카드의 제출 결과도 사라짐');
 
   // 14) 다크 모드 + 2회 코드 문항
   await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: 'dark' }] });
@@ -202,6 +208,6 @@ const typeInto = (sel, value) => ev(`(() => { const el = document.querySelector(
   console.log(results.join('\n'));
   console.log('--- console/log errors ---');
   console.log(logs.length ? logs.join('\n') : '(없음)');
-  ws.close(); edge.kill();
+  ws.close(); stopEdge();
   process.exit(0);
-})().catch(e => { console.error('TEST CRASH', e); console.log(results.join('\n')); console.log(logs.join('\n')); try { edge.kill(); } catch (_) {} process.exit(1); });
+})().catch(e => { console.error('TEST CRASH', e); console.log(results.join('\n')); console.log(logs.join('\n')); stopEdge(); process.exit(1); });

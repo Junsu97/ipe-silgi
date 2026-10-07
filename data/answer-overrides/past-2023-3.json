@@ -1,0 +1,176 @@
+{
+  "past-2023-3-2": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "ㅇ",
+          "ㅇ. OAuth"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "보기 기호 + 메모 표기 분리, 기호 단독/기호+용어 인정"
+  },
+  "past-2023-3-3": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "①",
+        "answers": [
+          "chmod"
+        ]
+      },
+      {
+        "label": "②",
+        "answers": [
+          "751"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 ①② 분리"
+  },
+  "past-2023-3-7": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "①",
+        "answers": [
+          "MAC",
+          "MAC(Mandatory Access Control)"
+        ]
+      },
+      {
+        "label": "②",
+        "answers": [
+          "RBAC",
+          "RBAC(Role-Based Access Control)"
+        ]
+      },
+      {
+        "label": "③",
+        "answers": [
+          "DAC",
+          "DAC(Discretionary Access Control)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 ①②③ 분리 (영어 약자 지정)"
+  },
+  "past-2023-3-9": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "ATM",
+          "ATM(Asynchronous Transfer Mode)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "답 + 메모 표기를 인정 답안으로 펼침 (영어 약자 지정)"
+  },
+  "past-2023-3-15": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "패키지(Package)",
+          "패키지",
+          "Package",
+          "패키지 다이어그램",
+          "Package Diagram",
+          "패키지 다이어그램(Package Diagram)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 안·밖 표기 분리, 다이어그램 접미 유무"
+  },
+  "past-2023-3-16": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "ㄱ",
+          "ㄱ. Equivalence Partitioning"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "보기 기호 단독/기호+용어 인정"
+  },
+  "past-2023-3-17": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "①",
+        "answers": [
+          "IaaS",
+          "IaaS(Infrastructure as a Service)"
+        ]
+      },
+      {
+        "label": "②",
+        "answers": [
+          "PaaS",
+          "PaaS(Platform as a Service)"
+        ]
+      },
+      {
+        "label": "③",
+        "answers": [
+          "SaaS",
+          "SaaS(Software as a Service)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 ①②③ 분리"
+  },
+  "past-2023-3-19": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "①",
+        "answers": [
+          "ㄷ",
+          "ㄷ. ⋈",
+          "⋈"
+        ]
+      },
+      {
+        "label": "②",
+        "answers": [
+          "ㄴ",
+          "ㄴ. π",
+          "π"
+        ]
+      },
+      {
+        "label": "③",
+        "answers": [
+          "ㄱ",
+          "ㄱ. σ",
+          "σ"
+        ]
+      },
+      {
+        "label": "④",
+        "answers": [
+          "ㄹ",
+          "ㄹ. ÷",
+          "÷"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 ①~④ 분리, 보기 기호 단독/기호+기호값 인정"
+  }
+}

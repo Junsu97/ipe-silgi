@@ -1,0 +1,279 @@
+{
+  "past-2021-1-1": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "RARP",
+          "RARP(역주소해석프로토콜)",
+          "역주소해석프로토콜",
+          "Reverse Address Resolution Protocol"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 안·밖 표기 인정"
+  },
+  "past-2021-1-2": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "물리적 설계",
+          "물리적"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "개념적 설계",
+          "개념적"
+        ]
+      },
+      {
+        "label": "C",
+        "answers": [
+          "논리적 설계",
+          "논리적"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B, C 분리"
+  },
+  "past-2021-1-3": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "기능적",
+          "기능",
+          "기능적 요구사항",
+          "Functional"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "비기능적",
+          "비기능",
+          "비기능적 요구사항",
+          "Non-functional"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B 분리"
+  },
+  "past-2021-1-9": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "1",
+        "answers": [
+          "경계값 분석",
+          "경곗값 분석",
+          "경계값 분석 테스트",
+          "Boundary Value Analysis"
+        ]
+      },
+      {
+        "label": "2",
+        "answers": [
+          "동치 분할 테스트",
+          "동치 분할",
+          "동치 분할 기법",
+          "동등 분할 테스트",
+          "동등 분할",
+          "Equivalence Partitioning"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "예제 1, 2 칸 분리 · 저장된 A, B 를 지문 표기로 맞춤"
+  },
+  "past-2021-1-10": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "단위 테스트",
+          "단위",
+          "Unit Test"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "통합 테스트",
+          "통합",
+          "Integration Test"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B 분리"
+  },
+  "past-2021-1-11": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "128",
+          "128비트",
+          "128bit"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "8",
+          "8비트",
+          "8bit"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B 분리 · 단위 유무 인정"
+  },
+  "past-2021-1-12": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "프로세스 간 통신",
+          "프로세스 간 통신(IPC, Inter Process Communication)",
+          "IPC",
+          "Inter Process Communication",
+          "프로세스 간 통신(IPC)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 안·밖 표기 인정"
+  },
+  "past-2021-1-13": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "EAI",
+          "EAI (Enterprise Application integration)",
+          "Enterprise Application Integration"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 안·밖 표기 인정"
+  },
+  "past-2021-1-14": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "Cardinality",
+        "answers": [
+          "5",
+          "5개"
+        ]
+      },
+      {
+        "label": "Degree",
+        "answers": [
+          "4",
+          "4개"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "Cardinality, Degree 칸 분리"
+  },
+  "past-2021-1-16": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "연산",
+          "Operation",
+          "연산(Operation)"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "구조",
+          "Structure",
+          "구조(Structure)"
+        ]
+      },
+      {
+        "label": "C",
+        "answers": [
+          "제약조건",
+          "제약",
+          "Constraint",
+          "제약조건(Constraint)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B, C 분리 · 저장된 「A:.연산」 표기 정리"
+  },
+  "past-2021-1-18": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "임의적 접근 통제",
+          "임의적 접근 통제(DAC, Discretionary Access Control)",
+          "임의 접근 통제",
+          "임의적 접근 제어",
+          "DAC",
+          "Discretionary Access Control",
+          "임의적 접근 통제(DAC)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 안·밖 표기 인정"
+  },
+  "past-2021-1-19": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "내용 결합도",
+          "내용",
+          "Content Coupling"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "스탬프 결합도",
+          "스탬프",
+          "Stamp Coupling"
+        ]
+      },
+      {
+        "label": "C",
+        "answers": [
+          "공통 결합도",
+          "공통",
+          "Common Coupling"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B, C 분리"
+  }
+}

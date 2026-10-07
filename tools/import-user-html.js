@@ -64,6 +64,38 @@ for (const [key, attachmentId] of SOURCES) {
   } else sets.push({ key: `past-${key}`, name: `${label} 기출`, questions });
   console.log(label, questions.length, '문항', questions.reduce((n, q) => n + q.images.length, 0), '이미지');
 }
+// 제공 HTML에 섞인 자동 번역·오타와 누락 조건을 문항별로 보정한다.
+const qAt = (setKey, index) => sets.find(s => s.key === `past-${setKey}`).questions[index - 1];
+let q = qAt('2021-1', 5);
+q.question = '다음 파이썬 코드의 출력 결과를 쓰시오. (제공 HTML에서 자동 번역으로 깨진 코드와 문자열을 복원함)';
+q.code = `class Good:
+    li = ["Seoul", "Korea", "Incheon", "Daejeon", "Daegu", "Pusan"]
+
+g = Good()
+result = ''
+for city in g.li:
+    result += city[0]
+print(result)`;
+q.parts[0].answers = ['SKIDDP'];
+q.explanation = '각 문자열의 첫 글자를 순서대로 이어 붙이면 S, K, I, D, D, P이므로 SKIDDP이다.';
+q = qAt('2021-1', 17);
+q.code = q.code.replace('정수 i, j;', 'int i, j;').replace('}또 다른{', '}else{');
+q.parts[0].answers = ['0+1+2+3+4+5=15'];
+q.explanation = 'System.out.print에는 공백이 없다. 각 숫자 사이에 +만 출력하고 마지막에 =15를 이어 출력한다.';
+q = qAt('2022-3', 7);
+q.question += '\n\n부서.부서코드는 기본키이고 직원.부서코드는 이를 참조하며, 외래 키에 ON DELETE CASCADE가 설정되어 있다. 두 SELECT의 결과를 순서대로 쓰시오.';
+q.code = q.code.replace("('20', '기획부'),  ('10', '개발부')", "('20', '기획부'),  ('30', '개발부')");
+q.parts[0].answers = ['2\n5'];
+q.explanation = '처음에는 부서코드 20인 직원이 2명이다. 부서 20을 삭제하면 ON DELETE CASCADE에 따라 해당 직원 2명도 삭제되므로 남은 직원은 5명이다. 제공 HTML에는 외래 키 조건이 빠지고 부서코드 30이 10으로 잘못 기재되어 있었다.';
+q = qAt('2023-3', 12);
+q.parts[0].answers = ['NAT(Network Address Translation)', 'NAT'];
+q.explanation = 'NAT는 Network Address Translation의 약자이다. IP 주소를 변환해 내부와 외부 네트워크의 통신을 중계한다.';
+q = qAt('2023-3', 17);
+q.parts[0].answers = ['① IaaS\n② PaaS\n③ SaaS'];
+q.explanation = '① IaaS는 인프라, ② PaaS는 개발·실행 플랫폼, ③ SaaS는 응용 소프트웨어를 서비스로 제공한다.';
+q = qAt('2025-1-1', 2);
+q.parts[0].answers = ['도메인, 개체, 참조'];
+q.explanation = '표의 ㄱ은 속성 값의 범위를 제한하는 도메인, ㄴ은 기본키와 투플에 적용되는 개체, ㄷ은 외래키로 릴레이션 사이의 관계를 유지하는 참조 무결성이다.';
 fs.writeFileSync(path.join(ROOT, 'data', 'imported-sets.json'), JSON.stringify(sets, null, 2) + '\n');
 const usedImages = new Set(sets.flatMap(set => set.questions.flatMap(q => q.images.map(src => path.basename(src)))));
 for (const filename of fs.readdirSync(imageDir)) if (!usedImages.has(filename)) fs.unlinkSync(path.join(imageDir, filename));

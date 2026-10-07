@@ -1,0 +1,199 @@
+{
+  "past-2020-4-2": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "행위",
+          "행위(Behavioral)",
+          "Behavioral",
+          "행위 패턴",
+          "Behavioral Pattern"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 안·밖 표기 인정"
+  },
+  "past-2020-4-4": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "즉시 갱신 회복 기법",
+          "즉시갱신 회복 기법(Immediate Update)",
+          "즉시 갱신 기법",
+          "즉시 갱신",
+          "Immediate Update"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 안·밖 표기와 접미 유무 인정"
+  },
+  "past-2020-4-5": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "n > 0",
+          "n >= 1",
+          "i < 8",
+          "i <= 7"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "n % 2",
+          "n & 1"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B 분리 · or 로 적힌 답을 각각 인정"
+  },
+  "past-2020-4-6": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "3"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "5"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B 분리"
+  },
+  "past-2020-4-8": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "NAT",
+          "NAT(Network Address Translation)",
+          "Network Address Translation",
+          "네트워크 주소 변환"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 안·밖 표기 인정"
+  },
+  "past-2020-4-11": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "하둡",
+          "하둡(Hadoop)",
+          "Hadoop"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 안·밖 표기 인정"
+  },
+  "past-2020-4-12": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "1",
+        "answers": [
+          "삽입 이상",
+          "삽입 이상(Insertion Anomaly)",
+          "Insertion Anomaly",
+          "삽입"
+        ]
+      },
+      {
+        "label": "2",
+        "answers": [
+          "삭제 이상",
+          "삭제 이상(Delete Anomaly)",
+          "Delete Anomaly",
+          "Deletion Anomaly",
+          "삭제"
+        ]
+      },
+      {
+        "label": "3",
+        "answers": [
+          "갱신 이상",
+          "갱신 이상(Update Anomaly)",
+          "Update Anomaly",
+          "수정 이상",
+          "Modification Anomaly",
+          "갱신"
+        ]
+      }
+    ],
+    "unordered": true,
+    "reason": "이상 3가지 칸 분리 · 순서 무관"
+  },
+  "past-2020-4-13": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "①",
+        "answers": [
+          "준비",
+          "준비(Ready)",
+          "Ready",
+          "준비 상태"
+        ]
+      },
+      {
+        "label": "②",
+        "answers": [
+          "실행",
+          "실행(Run)",
+          "Run",
+          "Running",
+          "실행 상태"
+        ]
+      },
+      {
+        "label": "③",
+        "answers": [
+          "대기",
+          "대기(Wait)",
+          "Wait",
+          "Waiting",
+          "Block",
+          "Blocked",
+          "대기 상태"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "그림 빈칸 ①②③ 분리 · 저장된 A, B, C 를 지문 표기로 맞춤"
+  },
+  "past-2020-4-17": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "유닉스",
+          "유닉스(UNIX)",
+          "UNIX"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 안·밖 표기 인정"
+  }
+}

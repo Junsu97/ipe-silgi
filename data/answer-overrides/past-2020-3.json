@@ -1,0 +1,93 @@
+{
+  "past-2020-3-2": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "0"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "출력값에 붙은 메모 「(숫자 0)」 제거 — 그대로면 0 입력이 오답"
+  },
+  "past-2020-3-7": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "1234561, 124567",
+          "124567, 1234561",
+          "1234567, 124561",
+          "124561, 1234567"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "「또는」 두 경로 쌍을 인정 답안으로(쌍 제약 때문에 칸 분리 안 함)"
+  },
+  "past-2020-3-12": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "블랙박스 테스트",
+          "명세 기반 테스트",
+          "블랙박스 테스트(명세 기반 테스트)",
+          "블랙박스",
+          "Black Box Test",
+          "Black Box Testing",
+          "블랙박스 테스팅"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "답 하나 + 괄호 표기 펼침"
+  },
+  "past-2020-3-18": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "포인트 투 포인트",
+          "Point-to-point",
+          "포인트 투 포인트(Point-to-point)"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "허브 앤 스포크",
+          "Hub & Spoke",
+          "Hub and Spoke",
+          "허브 앤 스포크(Hub & Spoke)"
+        ]
+      }
+    ],
+    "unordered": true,
+    "reason": "빈칸 A, B 분리(지문상 A·B 배정 순서 무관)"
+  },
+  "past-2020-3-20": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "ALTER"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "ADD"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B 분리"
+  }
+}

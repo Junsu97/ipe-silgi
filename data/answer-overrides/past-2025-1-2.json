@@ -1,0 +1,188 @@
+{
+  "past-2025-1-23": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "CRC",
+          "CRC(Cyclic Redundancy Check)",
+          "CRC(순환 중복 검사)",
+          "CRC(Cyclic Redundancy Check, 순환 중복 검사)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "네 빈칸이 같은 용어라 1칸 유지, 영문 약자 요구라 CRC 단독 인정"
+  },
+  "past-2025-1-24": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "ㄹ",
+          "ㄹ. 스캐어 웨어",
+          "스캐어 웨어",
+          "스케어웨어",
+          "Scareware",
+          "ㄹ. Scareware"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "보기 기호 단독·기호+용어 인정"
+  },
+  "past-2025-1-26": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "ARP",
+          "Address Resolution Protocol",
+          "ARP(Address Resolution Protocol)"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "RARP",
+          "Reverse ARP",
+          "Reverse Address Resolution Protocol",
+          "RARP(Reverse Address Resolution Protocol)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (1)(2) 분리"
+  },
+  "past-2025-1-28": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "ㄷ",
+          "ㄷ. degree",
+          "degree"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "ㅁ",
+          "ㅁ. cardinality",
+          "cardinality"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "ㅅ",
+          "ㅅ. foreign",
+          "foreign"
+        ]
+      },
+      {
+        "label": "(4)",
+        "answers": [
+          "ㄱ",
+          "ㄱ. domain",
+          "domain"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (1)~(4) 분리, 기호·기호+용어 인정"
+  },
+  "past-2025-1-32": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "ㅁ",
+          "ㅁ. 내용 결합도",
+          "ㅁ. 내용",
+          "내용 결합도",
+          "내용"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "ㄴ",
+          "ㄴ. 스탬프 결합도",
+          "ㄴ. 스탬프",
+          "스탬프 결합도",
+          "스탬프"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "ㄹ",
+          "ㄹ. 공통 결합도",
+          "ㄹ. 공통",
+          "공통 결합도",
+          "공통"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (1)~(3) 분리, 기호·기호+용어 인정"
+  },
+  "past-2025-1-35": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "①",
+        "answers": [
+          "int a = 0"
+        ]
+      },
+      {
+        "label": "②",
+        "answers": [
+          "a < m || b[a] < x",
+          "while (a < m || b[a] < x)"
+        ]
+      },
+      {
+        "label": "③",
+        "answers": [
+          "b[a] < 0",
+          "if (b[a] < 0)"
+        ]
+      },
+      {
+        "label": "④",
+        "answers": [
+          "b[a] = -b[a];"
+        ]
+      },
+      {
+        "label": "⑤",
+        "answers": [
+          "a++;"
+        ]
+      },
+      {
+        "label": "⑥",
+        "answers": [
+          "return 1;"
+        ]
+      },
+      {
+        "label": "⑦",
+        "answers": [
+          "③ → ④ → ⑤ → ② → ⑥",
+          "3 → 4 → 5 → 2 → 6"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 ①~⑦ 분리(저장 답의 (1)~(7)을 지문 표기로)"
+  }
+}

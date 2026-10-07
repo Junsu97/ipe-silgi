@@ -1,0 +1,146 @@
+{
+  "past-2025-2-1": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "인덱스",
+          "색인",
+          "Index",
+          "인덱스(색인)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "「or」 답을 인정 답안으로 분리"
+  },
+  "past-2025-2-2": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "ㄷ",
+          "ㄷ. Attribute"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "보기 기호 단독·기호+용어 인정"
+  },
+  "past-2025-2-4": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "SJF",
+          "Shortest Job First",
+          "SJF(Shortest Job First)",
+          "최단 작업 우선"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "SRT",
+          "SRTF",
+          "Shortest Remaining Time",
+          "Shortest Remaining Time First",
+          "SRT(Shortest Remaining Time)",
+          "SRTF(Shortest Remaining Time First)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (1)(2) 분리"
+  },
+  "past-2025-2-6": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "①",
+        "answers": [
+          "128"
+        ]
+      },
+      {
+        "label": "②",
+        "answers": [
+          "62",
+          "62개"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 ①② 분리, 단위 유무 인정"
+  },
+  "past-2025-2-11": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "1234561, 124567",
+          "124567, 1234561",
+          "1234567, 124561",
+          "124561, 1234567"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "「or」 두 경로 쌍을 인정 답안으로 분리(쌍 안 순서 무관). 칸을 나누면 잘못된 조합도 맞게 돼 1칸 유지"
+  },
+  "past-2025-2-13": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "11.75ms",
+          "11.75"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "단위 유무 인정"
+  },
+  "past-2025-2-20": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "①",
+        "answers": [
+          "TTL"
+        ]
+      },
+      {
+        "label": "②",
+        "answers": [
+          "부장"
+        ]
+      },
+      {
+        "label": "③",
+        "answers": [
+          "대리"
+        ]
+      },
+      {
+        "label": "④",
+        "answers": [
+          "과장"
+        ]
+      },
+      {
+        "label": "⑤",
+        "answers": [
+          "차장"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "결과 표 빈칸 ①~⑤ 분리"
+  }
+}

@@ -67,6 +67,18 @@ for (const set of JSON.parse(fs.readFileSync(P('data', 'imported-sets.json'), 'u
       if (e.area) q.bucketLabel = e.area;
     }
   }
+  // data/answer-overrides/<회차키>.json: 묶인 빈칸을 칸별로 나눈 정답 구조
+  const ov = path.join(P('data', 'answer-overrides'), set.key + '.json');
+  if (fs.existsSync(ov)) {
+    const o = JSON.parse(fs.readFileSync(ov, 'utf8'));
+    for (const q of set.questions) {
+      const e = o[q.id];
+      if (!e) continue;
+      if (e.type) q.type = e.type;
+      if (Array.isArray(e.parts) && e.parts.length) q.parts = e.parts;
+      q.unordered = !!e.unordered;
+    }
+  }
   SETS.push(set);
 }
 const spare = Object.keys(all).filter(id => !used.has(id));

@@ -1,5 +1,5 @@
 dist/
-tools/uitest/profile/
+tools/uitest/profile*/
 tools/uitest/shots/
 tools/icon/*.class
 node_modules/

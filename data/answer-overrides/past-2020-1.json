@@ -1,0 +1,219 @@
+{
+  "past-2020-1-3": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "헤더",
+          "머릿말",
+          "머리말",
+          "Header",
+          "헤더(머릿말)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "답 하나 + 괄호 표기 펼침"
+  },
+  "past-2020-1-6": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "1",
+        "answers": [
+          "구문",
+          "Syntax",
+          "구문(Syntax)"
+        ]
+      },
+      {
+        "label": "2",
+        "answers": [
+          "의미",
+          "Semantics",
+          "의미(Semantics)"
+        ]
+      },
+      {
+        "label": "3",
+        "answers": [
+          "타이밍",
+          "Timing",
+          "타이밍(Timing)"
+        ]
+      }
+    ],
+    "unordered": true,
+    "reason": "3요소 순서 무관 나열 분리"
+  },
+  "past-2020-1-9": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(가)",
+        "answers": [
+          "원자성",
+          "Atomicity",
+          "원자성(Atomicity)"
+        ]
+      },
+      {
+        "label": "(나)",
+        "answers": [
+          "독립성",
+          "격리성",
+          "Isolation",
+          "독립성(Isolation)",
+          "격리성(Isolation)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (가)(나) 분리"
+  },
+  "past-2020-1-10": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "랜드 어택",
+          "Land Attack",
+          "랜드 어택(Land Attack)",
+          "랜드 공격",
+          "Land"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "답 하나 + 괄호 표기 펼침"
+  },
+  "past-2020-1-12": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "계산식",
+        "answers": [
+          "(30000 / 5) / 300",
+          "30000 / (5 × 300)",
+          "30000 / (5 * 300)",
+          "30000 / (300 × 5)",
+          "30000 / (300 * 5)",
+          "30000 / 1500",
+          "(30000 / 300) / 5"
+        ]
+      },
+      {
+        "label": "결과",
+        "answers": [
+          "20개월",
+          "20"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "계산식·결과 두 값 분리"
+  },
+  "past-2020-1-13": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(가)",
+        "answers": [
+          "처리량",
+          "Throughput",
+          "처리량(Throughput)"
+        ]
+      },
+      {
+        "label": "(나)",
+        "answers": [
+          "응답 시간",
+          "Response Time",
+          "응답 시간(Response Time)"
+        ]
+      },
+      {
+        "label": "(다)",
+        "answers": [
+          "경과 시간",
+          "Turnaround Time",
+          "경과 시간(Turnaround Time)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (가)(나)(다) 분리"
+  },
+  "past-2020-1-14": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(가)",
+        "answers": [
+          "결합도",
+          "Coupling",
+          "결합도(Coupling)"
+        ]
+      },
+      {
+        "label": "(나)",
+        "answers": [
+          "응집도",
+          "Cohesion",
+          "응집도(Cohesion)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 (가)(나) 분리"
+  },
+  "past-2020-1-16": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "1",
+        "answers": [
+          "F"
+        ]
+      },
+      {
+        "label": "2",
+        "answers": [
+          "J"
+        ]
+      }
+    ],
+    "unordered": true,
+    "reason": "해당 모듈 2개 순서 무관 분리"
+  },
+  "past-2020-1-20": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "①",
+        "answers": [
+          "200",
+          "200개"
+        ]
+      },
+      {
+        "label": "②",
+        "answers": [
+          "3",
+          "3개"
+        ]
+      },
+      {
+        "label": "③",
+        "answers": [
+          "1",
+          "1개"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 ①②③ 분리, 저장 답의 1) 2) 3)을 지문 표기로"
+  }
+}

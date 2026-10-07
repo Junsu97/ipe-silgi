@@ -1,0 +1,85 @@
+{
+  "past-2022-2-2": {
+    "type": "short",
+    "parts": [
+      { "label": "1", "answers": ["IDEA"] },
+      { "label": "2", "answers": ["SKIPJACK"] }
+    ],
+    "unordered": false,
+    "reason": "지문 1, 2 칸 분리"
+  },
+  "past-2022-2-5": {
+    "type": "short",
+    "parts": [
+      { "label": "정답", "answers": ["VPN", "가상사설망", "가상사설망(VPN)", "Virtual Private Network"] }
+    ],
+    "unordered": false,
+    "reason": "괄호 병기 답을 인정 표기로 펼침"
+  },
+  "past-2022-2-6": {
+    "type": "short",
+    "parts": [
+      { "label": "정답", "answers": ["ISP", "ISP (Interface Segregation Principle)", "Interface Segregation Principle", "인터페이스 분리 원칙"] }
+    ],
+    "unordered": false,
+    "reason": "괄호 병기 답을 인정 표기로 펼침"
+  },
+  "past-2022-2-9": {
+    "type": "short",
+    "parts": [
+      { "label": "(1)", "answers": ["128", "139.127.19.128"] },
+      { "label": "(2)", "answers": ["62", "62개"] }
+    ],
+    "unordered": false,
+    "reason": "(1)(2) 칸 분리, 단위 유무 인정"
+  },
+  "past-2022-2-10": {
+    "type": "short",
+    "parts": [
+      { "label": "1", "answers": ["베타", "Beta", "베타 테스트", "Beta Test"] },
+      { "label": "2", "answers": ["알파", "Alpha", "알파 테스트", "Alpha Test"] }
+    ],
+    "unordered": false,
+    "reason": "지문 1, 2 칸 분리"
+  },
+  "past-2022-2-14": {
+    "type": "short",
+    "parts": [
+      { "label": "(1)", "answers": ["IGP"] },
+      { "label": "(2)", "answers": ["EGP"] },
+      { "label": "(3)", "answers": ["OSPF"] },
+      { "label": "(4)", "answers": ["BGP"] }
+    ],
+    "unordered": false,
+    "reason": "설명 (1)~(4) 칸 분리"
+  },
+  "past-2022-2-18": {
+    "type": "short",
+    "parts": [
+      { "label": "1", "answers": ["Full", "Full Functional Dependency"] },
+      { "label": "2", "answers": ["Partial", "Partial Functional Dependency"] },
+      { "label": "3", "answers": ["Transitive", "Transitive Functional Dependency"] }
+    ],
+    "unordered": false,
+    "reason": "지문 1~3 칸 분리"
+  },
+  "past-2022-2-19": {
+    "type": "short",
+    "parts": [
+      { "label": "(1)", "answers": ["HTTP"] },
+      { "label": "(2)", "answers": ["Hypertext", "하이퍼텍스트"] },
+      { "label": "(3)", "answers": ["HTML"] }
+    ],
+    "unordered": false,
+    "reason": "설명 (1)(2)(3) 칸 분리"
+  },
+  "past-2022-2-20": {
+    "type": "short",
+    "parts": [
+      { "label": "Fan-in", "answers": ["3", "3개"] },
+      { "label": "Fan-out", "answers": ["2", "2개"] }
+    ],
+    "unordered": false,
+    "reason": "Fan-in, Fan-out 두 값 칸 분리"
+  }
+}

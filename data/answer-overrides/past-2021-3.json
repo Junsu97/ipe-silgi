@@ -1,0 +1,216 @@
+{
+  "past-2021-3-2": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "Authentication",
+          "인증",
+          "인증(Authentication)"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "Authorization",
+          "인가",
+          "권한 부여",
+          "인가(Authorization)"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "Accounting",
+          "계정 관리",
+          "과금",
+          "계정 관리(Accounting)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "설명 (1)(2)(3) 칸 분리"
+  },
+  "past-2021-3-5": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "Control Coupling",
+          "Control",
+          "제어(Control) 결합도",
+          "제어 결합도(Control Coupling)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 병기 답을 인정 표기로 펼침(영문 요구)"
+  },
+  "past-2021-3-6": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "데이터링크 계층",
+          "데이터링크",
+          "Data Link",
+          "Data Link Layer",
+          "데이터링크 계층(Data Link Layer)"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "네트워크 계층",
+          "네트워크",
+          "Network",
+          "Network Layer",
+          "네트워크 계층(Network Layer)"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "표현 계층",
+          "표현",
+          "Presentation",
+          "Presentation Layer",
+          "표현 계층(Presentation Layer)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "설명 (1)(2)(3) 칸 분리, 계층 접미 유무 인정"
+  },
+  "past-2021-3-7": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "Aggregation",
+          "집합",
+          "집약",
+          "집합(Aggregation)"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "Generalization",
+          "일반화",
+          "일반화(Generalization)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B 분리(저장 답 (1)(2) → 지문 표기)"
+  },
+  "past-2021-3-8": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "(1)",
+        "answers": [
+          "테스트 조건"
+        ]
+      },
+      {
+        "label": "(2)",
+        "answers": [
+          "테스트 데이터"
+        ]
+      },
+      {
+        "label": "(3)",
+        "answers": [
+          "예상 결과"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "표의 빈 열 3칸 분리(왼쪽부터 (1)(2)(3))"
+  },
+  "past-2021-3-9": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "Cause-Effect Graph",
+          "원인-결과 그래프",
+          "Cause Effect Graph (원인 결과 그래프)",
+          "원인-결과 그래프(Cause-Effect Graph)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "괄호 병기 답을 인정 표기로 펼침"
+  },
+  "past-2021-3-18": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "인덱스",
+          "색인",
+          "Index",
+          "인덱스(색인)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "「인덱스(또는 색인)」 메모를 인정 표기로 펼침(세 괄호 답 동일)"
+  },
+  "past-2021-3-20": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "A",
+        "answers": [
+          "상향식",
+          "상향식 통합 테스트",
+          "상향식 통합",
+          "Bottom-Up",
+          "Bottom-Up Integration Test"
+        ]
+      },
+      {
+        "label": "B",
+        "answers": [
+          "테스트 드라이버",
+          "드라이버",
+          "Test Driver",
+          "Driver",
+          "테스트 드라이버(Test Driver)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "빈칸 A, B 분리"
+  },
+  "past-2021-3-16": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "팩토리 메서드",
+          "팩토리",
+          "팩토리 메소드",
+          "Factory Method",
+          "Factory",
+          "팩토리 메서드 패턴",
+          "Factory Method Pattern",
+          "팩토리 메서드(Factory Method)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "정식 명칭 팩토리 메서드와 영문 표기 인정"
+  }
+}

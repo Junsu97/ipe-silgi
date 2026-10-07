@@ -1,0 +1,216 @@
+{
+  "past-2020-2-1": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "목표 복구 시간",
+          "RTO",
+          "Recovery Time Objective",
+          "목표 복구 시간(RTO)",
+          "RTO(Recovery Time Objective)",
+          "복구 목표 시간",
+          "복구 목표 시간(RTO)",
+          "목표 복구 시간(RTO; Recovery Time Objective)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "답 하나 + 괄호 표기 펼침"
+  },
+  "past-2020-2-3": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "AJAX",
+          "AJAX(Asynchronous Javascript And XML)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "지문이 영문 약어를 요구, 괄호 밖 약어 인정"
+  },
+  "past-2020-2-4": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "애자일",
+          "애자일 방법론",
+          "애자일 기법",
+          "Agile",
+          "애자일(Agile)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "답 하나 + 다른 표기 메모 펼침"
+  },
+  "past-2020-2-9": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "정적 분석 도구",
+          "정적 분석 툴",
+          "정적 테스팅 도구",
+          "코드 검사 도구",
+          "코드 인스펙션 툴"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "답 하나 + 다른 표기 메모 펼침"
+  },
+  "past-2020-2-10": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "Observer",
+          "Observer Pattern"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "답 하나 + 다른 표기 메모 펼침(지문이 영문 요구)"
+  },
+  "past-2020-2-11": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "안드로이드",
+          "Android",
+          "안드로이드(Android)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "답 하나 + 다른 표기 메모 펼침"
+  },
+  "past-2020-2-13": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "SOAP",
+          "Simple Object Access Protocol",
+          "SOAP(Simple Object Access Protocol)"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "답 하나 + 괄호 표기 펼침"
+  },
+  "past-2020-2-16": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "정답",
+        "answers": [
+          "chmod 751 a.txt",
+          "chmod 751 ./a.txt"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "한 줄 명령 「또는」 두 표기를 인정 답안으로"
+  },
+  "past-2020-2-18": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "1",
+        "answers": [
+          "개념적 설계",
+          "개념 설계",
+          "개념적"
+        ]
+      },
+      {
+        "label": "2",
+        "answers": [
+          "논리적 설계",
+          "논리 설계",
+          "논리적"
+        ]
+      },
+      {
+        "label": "3",
+        "answers": [
+          "물리적 설계",
+          "물리 설계",
+          "물리적"
+        ]
+      }
+    ],
+    "unordered": false,
+    "reason": "순서대로 빈칸 3개 분리"
+  },
+  "past-2020-2-2": {
+    "type": "short",
+    "parts": [
+      {
+        "label": "원소 1",
+        "answers": [
+          "한국",
+          "중국",
+          "베트남",
+          "홍콩",
+          "태국"
+        ]
+      },
+      {
+        "label": "원소 2",
+        "answers": [
+          "중국",
+          "베트남",
+          "홍콩",
+          "태국",
+          "한국"
+        ]
+      },
+      {
+        "label": "원소 3",
+        "answers": [
+          "베트남",
+          "홍콩",
+          "태국",
+          "한국",
+          "중국"
+        ]
+      },
+      {
+        "label": "원소 4",
+        "answers": [
+          "홍콩",
+          "태국",
+          "한국",
+          "중국",
+          "베트남"
+        ]
+      },
+      {
+        "label": "원소 5",
+        "answers": [
+          "태국",
+          "한국",
+          "중국",
+          "베트남",
+          "홍콩"
+        ]
+      }
+    ],
+    "unordered": true,
+    "reason": "집합 출력 순서가 실행마다 달라 원소 5칸·순서 무관으로 채점"
+  }
+}
