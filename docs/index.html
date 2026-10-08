@@ -467,6 +467,7 @@ function renderExam() {
     + '<div class="status-line" style="margin-top:12px">' + status + '</div>'
     + (actions ? '<div class="q-actions">' + actions + '</div>' : '') + key + '</article>'
     + '<div class="exam-bar"><div class="exam-bar-in"><button class="btn" data-act="prev"' + (qi === 0 ? ' disabled' : '') + '>‹ 이전</button><button class="btn grid-btn" data-act="grid">' + (qi + 1) + ' / ' + n + ' · 입력 ' + s.locked + '</button><button class="btn" data-act="next"' + (qi === n - 1 ? ' disabled' : '') + '>다음 ›</button></div></div>';
+  syncTyping();
 }
 function keyHtml(q, verdictByPart, myVals) {
   const rows = q.parts.map((p, pi) => {
@@ -602,7 +603,14 @@ viewEl.addEventListener('keydown', e => {
 });
 
 document.addEventListener('focusin', e => { if (e.target.matches && e.target.matches('input, textarea')) document.body.classList.add('typing'); });
-document.addEventListener('focusout', () => document.body.classList.remove('typing'));
+// 지금 실제로 편집 가능한 입력칸에 포커스가 있을 때만 하단 바를 숨긴다.
+// 아이폰은 버튼을 눌러도 입력칸 포커스가 풀리지 않고, 화면을 다시 그리면 focusout 이 오지 않을 수 있어 직접 맞춘다.
+function syncTyping() {
+  const el = document.activeElement;
+  const typing = !!(el && el.isConnected && el.matches && el.matches('input:not([readonly]), textarea:not([readonly])'));
+  document.body.classList.toggle('typing', typing);
+}
+document.addEventListener('focusout', () => setTimeout(syncTyping, 0));
 
 // 시작
 (function boot() {

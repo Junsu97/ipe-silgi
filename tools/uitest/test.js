@@ -190,6 +190,22 @@ const typeInto = (sel, value) => ev(`(() => { const el = document.querySelector(
   expect(await ev(`document.querySelectorAll('.hist-row').length`) === 0, '기록 지우기 후 응시 기록 0건');
   expect(await ev(`!document.querySelector('[data-act="result"][data-set="r1"]') && !getAttempt('r1').submitted`), '기록 지우기 후 1회 카드의 제출 결과도 사라짐');
 
+  // 13-2) 입력칸 포커스가 남은 채 정답보기 → 하단 이동 바가 다시 보여야 한다 (아이폰은 버튼을 눌러도 포커스가 안 풀림)
+  results.push("INFO pointer:coarse=" + await ev(`matchMedia("(pointer: coarse)").matches`));
+  await click('[data-act="start"][data-set="r3"]'); await sleep(300);
+  await ev(`(() => { const el = document.querySelector(".answers input, .answers textarea"); el.focus(); el.value = "x"; el.dispatchEvent(new Event("input", { bubbles: true })); })()`);
+  await ev(`document.body.classList.add("typing")`); // 헤드리스는 포커스 이벤트가 안 와서 아이폰처럼 숨김 상태를 직접 만든다
+  expect(await ev(`getComputedStyle(document.querySelector(".exam-bar")).display === "none"`), '입력 중에는 하단 바 숨김 상태');
+  await click('[data-act="lock-reveal"]'); await sleep(200);
+  expect(await ev(`getComputedStyle(document.querySelector(".exam-bar")).display !== "none"`), '정답보기 후 하단 이동 바 표시');
+  await click('[data-act="next"]'); await sleep(200);
+  expect(await ev(`document.querySelector(".q-num").textContent`) === "2.", '정답보기 후 다음 문항으로 이동');
+  await ev(`(() => { ui.qi = 2; saveUi(); renderExam(); })()`);
+  await ev(`(() => { document.querySelector(".answers input, .answers textarea").focus(); document.body.classList.add("typing"); })()`);
+  await click('[data-act="reveal"]'); await sleep(200);
+  expect(await ev(`getComputedStyle(document.querySelector(".exam-bar")).display !== "none"`), '정답보기(미응답) 후 하단 이동 바 표시');
+  await click('[data-act="home"]'); await sleep(200);
+
   // 14) 다크 모드 + 2회 코드 문항
   await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: 'dark' }] });
   await click('[data-act="start"][data-set="r2"]'); await sleep(300);
