@@ -157,6 +157,15 @@ const typeInto = (sel, value) => ev(`(() => { const el = document.querySelector(
   expect(score === expectCorrect * 5, `제출 점수 ${score}점 = 정답 ${expectCorrect}개 × 5`);
   expect(await ev(`document.querySelector('.verdict').textContent`) === (score >= 60 ? '합격' : '불합격'), '합격/불합격 판정은 제출 후에만');
   await overflow('결과'); await shot('08-result', true);
+  // 오답 복사: 내용 확인 + 버튼 동작(클립보드가 막히면 직접 복사 화면)
+  const rep = await ev(`wrongReport(setOf("r1"), getAttempt("r1"))`);
+  expect(rep.startsWith("[정처기 실기 오답] 제1회 모의고사") && (rep.match(/^■ /gm) || []).length === 20 - expectCorrect, `오답 복사 텍스트에 오답·미응답 ${20 - expectCorrect}문항`);
+  expect(/내 답: zzz/.test(rep) && /정답: /.test(rep) && rep.includes("(미응답"), '오답 복사에 내 답·정답·미응답 표시');
+  fs.writeFileSync(path.join(OUT, "wrong-report.txt"), rep);
+  await click('[data-act="copy-wrong"]'); await sleep(400);
+  expect(await ev(`!!document.querySelector(".toast") || (document.getElementById("copy-box") && document.getElementById("copy-box").value.startsWith("[정처기 실기 오답]"))`), '오답 복사 버튼: 복사 완료 알림 또는 직접 복사 화면');
+  results.push("INFO 복사 방식: " + (await ev(`document.querySelector(".toast") ? "클립보드" : "직접 복사 화면"`)));
+  await ev(`closeSheet()`);
 
   // 10) 결과 → 오답 해설
   await click('[data-act="key-wrong"]'); await sleep(300);

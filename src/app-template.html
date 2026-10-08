@@ -220,6 +220,7 @@ pre.code .ln::before { counter-increment: ln; content: counter(ln); display: inl
 .intro { font-size: 14.5px; color: var(--ink-2); border-left: 3px solid var(--rule); padding-left: 10px; }
 
 .foot { margin-top: 36px; font-size: 12.5px; color: var(--ink-3); line-height: 1.6; }
+.toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 40; background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 999px; font-size: 14px; box-shadow: 0 4px 16px rgba(0,0,0,.18); }
 @media (pointer: coarse) { body.typing .exam-bar { display: none; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 @media (max-width: 420px) { pre.code { font-size: 12.5px; padding: 10px; } pre.code .ln::before { width: 1.6em; margin-right: .7em; } }
@@ -489,6 +490,53 @@ function submit() {
   go('result');
 }
 
+// ---------- 오답 복사 ----------
+// 제출한 회차의 오답·미응답 문항을 지문·코드·내 답·정답과 함께 텍스트로 만든다(Claude 등에 붙여 넣기용)
+function wrongReport(set, a) {
+  const s = summarize(set, a);
+  const wrongIdx = set.questions.map((q, i) => i).filter(i => !s.per[i].correct);
+  const unanswered = wrongIdx.filter(i => !s.per[i].answered).length;
+  const out = [];
+  out.push('[정처기 실기 오답] ' + set.name + ' · ' + s.score + '점 (' + s.total + '문항 중 ' + s.correct + '개 정답) · ' + fmtDate(a.submittedAt));
+  out.push('오답 ' + (wrongIdx.length - unanswered) + '개 · 미응답 ' + unanswered + '개');
+  const multi = v => String(v).includes('\n');
+  for (const i of wrongIdx) {
+    const q = set.questions[i], g = s.per[i], vals = a.answers[i] || [];
+    out.push('');
+    out.push('■ ' + (i + 1) + '번 [' + q.bucketLabel + ']' + (q.point ? ' ' + q.point : '') + (g.answered ? '' : ' (미응답' + (a.revealed[i] ? ', 정답 확인함' : '') + ')'));
+    out.push('문제:');
+    out.push(String(q.question).trim());
+    if (q.code) { out.push('코드:'); out.push(String(q.code).replace(/\n+$/, '')); }
+    if (q.images && q.images.length) out.push('(그림 ' + q.images.length + '개 있음, 앱에서 확인)');
+    if (q.parts.length === 1) {
+      const mine = g.answered && vals[0] && vals[0].trim() ? vals[0].trim() : '(미응답)', key = q.parts[0].answers[0];
+      out.push(multi(mine) ? '내 답:\n' + mine : '내 답: ' + mine);
+      out.push(multi(key) ? '정답:\n' + key : '정답: ' + key);
+    } else {
+      if (q.unordered) out.push('(칸 순서 무관)');
+      q.parts.forEach((p, pi) => {
+        const mine = g.answered && vals[pi] && vals[pi].trim() ? vals[pi].trim() : '(미응답)';
+        out.push(p.label + ' 내 답: ' + mine + ' / 정답: ' + p.answers[0] + ' ' + (g.answered && g.parts[pi] ? '○' : '✕'));
+      });
+    }
+  }
+  return out.join('\n');
+}
+function showToast(msg) {
+  const t = document.createElement('div'); t.className = 'toast'; t.setAttribute('role', 'status'); t.textContent = msg;
+  document.body.appendChild(t); setTimeout(() => t.remove(), 2200);
+}
+function copyText(text) {
+  const fallback = () => {
+    openSheet('<div class="sheet-h"><h3>오답 복사</h3><button class="icon-btn" data-act="close-sheet" aria-label="닫기">' + ICON_CLOSE + '</button></div><p class="muted" style="margin:0">자동 복사가 막혀 있습니다. 아래 글을 길게 눌러 전체 선택한 뒤 복사하세요.</p><textarea id="copy-box" readonly style="width:100%;min-height:45vh;font:inherit;font-size:13px;line-height:1.5;padding:10px;border:1px solid var(--rule);border-radius:10px;background:var(--paper-2);color:var(--ink)">' + esc(text) + '</textarea>');
+    const box = document.getElementById('copy-box'); if (box) { box.focus(); box.setSelectionRange(0, box.value.length); }
+  };
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => showToast('오답을 복사했습니다'), fallback);
+    else fallback();
+  } catch (e) { fallback(); }
+}
+
 // ---------- 결과 ----------
 function renderResult() {
   const set = setOf(ui.setKey), a = getAttempt(ui.setKey);
@@ -503,7 +551,7 @@ function renderResult() {
     + '<div class="muted">' + s.total + '문항 중 ' + s.correct + '문항 정답 · 미응답 ' + (s.total - s.locked) + '문항 · 소요 ' + fmtSec(a.elapsed || 0) + ' · ' + fmtDate(a.submittedAt) + '</div>'
     + '<div class="by-topic">' + Object.entries(byTopic).map(([k, v]) => '<div><span>' + esc(k) + '</span><b>' + v.c + ' / ' + v.n + '</b></div>').join('') + '</div></div>'
     + '<div class="section"><div class="section-h"><h2>문항별 결과</h2><span class="muted" style="font-size:12.5px">번호를 누르면 해설</span></div><div class="result-cells">' + cells + '</div></div>'
-    + '<div class="section"><div class="btn-row"><button class="btn primary" data-act="key-wrong">오답 해설 보기</button><button class="btn" data-act="restart" data-set="' + set.key + '">다시 풀기</button></div></div>';
+    + '<div class="section"><div class="btn-row"><button class="btn primary" data-act="key-wrong">오답 해설 보기</button>' + (s.correct < s.total ? '<button class="btn" data-act="copy-wrong" data-set="' + set.key + '">오답 복사</button>' : '') + '<button class="btn" data-act="restart" data-set="' + set.key + '">다시 풀기</button></div></div>';
 }
 
 // ---------- 해설집 ----------
@@ -521,7 +569,8 @@ function renderKey() {
       + '<div class="body"><div class="q-text">' + renderText(q.question) + '</div>' + renderCode(q) + renderImages(q) + keyHtml(q, g && g.answered ? g.parts : null, hasResult ? (a.answers[i] || []) : null) + '</div></details>';
   }).join('') : '<div class="empty">표시할 문항이 없습니다</div>';
   viewEl.className = 'view';
-  viewEl.innerHTML = seg + filter + (hasResult ? '' : '<p class="muted" style="margin:10px 0 0;font-size:13px">제출한 시험이 있으면 오답만 모아 볼 수 있습니다.</p>') + '<div class="section" style="margin-top:14px">' + list + '</div>';
+  const copyLink = hasResult && s.correct < s.total ? '<div style="margin-top:8px"><button class="link-btn" data-act="copy-wrong" data-set="' + set.key + '">오답 복사</button></div>' : '';
+  viewEl.innerHTML = seg + filter + copyLink + (hasResult ? '' : '<p class="muted" style="margin:10px 0 0;font-size:13px">제출한 시험이 있으면 오답만 모아 볼 수 있습니다.</p>') + '<div class="section" style="margin-top:14px">' + list + '</div>';
   if (ui.keyOpen != null) { const el = document.getElementById('k' + ui.keyOpen); if (el) setTimeout(() => el.scrollIntoView({ block: 'start' }), 0); ui.keyOpen = null; saveUi(); }
 }
 
@@ -568,6 +617,7 @@ document.addEventListener('click', e => {
     case 'submit-ask': openSubmitAsk(); break;
     case 'submit': submit(); break;
     case 'key-goto': go('key', { keySet: ui.setKey, keyFilter: 'all', keyOpen: +t.dataset.i }); break;
+    case 'copy-wrong': { const cs = setOf(t.dataset.set); const ca = getAttempt(cs.key); if (ca.submitted) copyText(wrongReport(cs, ca)); break; }
     case 'key-wrong': go('key', { keySet: ui.setKey, keyFilter: 'wrong' }); break;
     case 'key-set': ui.keySet = t.dataset.set; saveUi(); renderKey(); break;
     case 'key-filter': ui.keyFilter = t.dataset.f; saveUi(); renderKey(); break;
